@@ -14,13 +14,11 @@
 
    <a href="{{ path('fos_user_registration_register') }}">register</a><br>
 
-   <a href="{{ path('fos_user_profile_show') }}">show profile</a><br>
-   <a href="{{ path('fos_user_profile_edit') }}">edit profile</a><br>
 
 
    <p>Hello miniClinic!</p>
    {% if is_granted('ROLE_USER') %}
-      <p>Only you can see this text!</p>
+      <p>Welcome to our clinic</p>
    {% endif %}
 
 {% endblock %}

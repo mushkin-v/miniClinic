@@ -36,7 +36,7 @@ class User extends BaseUser
      *      maxMessage = "Your card number must be maximum {{ limit }} "
      * )
      */
-    private $card_number;
+    private $card_number=1000;
 
     public function __construct()
     {
