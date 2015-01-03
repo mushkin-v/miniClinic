@@ -1,0 +1,15 @@
+{% extends ":default:index.html.twig" %}
+
+{% block logincontent %}
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ block('fos_user_content') }}
+        </div>
+    </div>
+
+    <a class="btn btn-danger" href="{{ path('homepage') }}">close</a><br>
+
+    {{ parent() }}
+
+{%  endblock %}
