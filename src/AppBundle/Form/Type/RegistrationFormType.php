@@ -11,7 +11,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 {
 parent::buildForm($builder, $options);
 
-$builder->add('card_number');
+$builder->add('card_number',null, array('label'=>'Card number:'));
 }
 
 public function getName()
