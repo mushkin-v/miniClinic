@@ -1,5 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends "::base.html.twig" %}
 
 {% block body %}
-    Homepage.
+
+{% block logincontent %}
+   {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+      {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+      <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+   {% else %}
+      <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+   {% endif %}
+   <br>
+
+   <a href="{{ path('fos_user_registration_register') }}">register</a><br>
+{% endblock logincontent %}
+
+   <p>Hello miniClinic!</p>
+   {% if is_granted('ROLE_USER') %}
+      <p>Welcome to our clinic</p>
+   {% endif %}
+
 {% endblock %}
