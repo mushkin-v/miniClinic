@@ -30,13 +30,13 @@ class User extends BaseUser
      * @Assert\NotBlank()
      *
      * @Assert\Range(
-     *      min = 1000,
+     *      min = 0,
      *      max = 9999,
      *      minMessage = "Your card number must be minimum {{ limit }} ",
      *      maxMessage = "Your card number must be maximum {{ limit }} "
      * )
      */
-    private $card_number=1000;
+    private $card_number=0;
 
     public function __construct()
     {

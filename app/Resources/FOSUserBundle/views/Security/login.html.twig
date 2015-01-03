@@ -8,7 +8,7 @@
 {% endif %}
 
 <form action="{{ path("fos_user_security_check") }}" method="post">
-    <div class="form-horizontal col-md-5">
+    <div class="form-horizontal col-md-12">
     <input class="form-control" type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
     <div class="form-group">
@@ -28,7 +28,12 @@
         </label>
     </div>
     <br>
-    <input class="form-group btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+    <input class="form-group blogin btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
     </div>
 </form>
+
+<div class="row col-md-12">
+    <a class="blogin btn btn-danger" role="button" href="{{ path('fos_user_registration_register') }}">register</a>
+</div>
+
 {% endblock fos_user_content %}
