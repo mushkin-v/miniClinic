@@ -7,8 +7,9 @@ show_run("Create DB", "app/console doctrine:database:create");
 show_run("Create scheme", "app/console doctrine:schema:create");
 show_run("Install assets", "app/console assets:install");
 
+show_run("Load fixtures", "app/console doctrine:fixtures:load --no-interaction");
+
 show_run("Create super admin user", "app/console fos:user:create admin admin@admin.com admin --super-admin");
 
-show_run("Load fixtures", "app/console doctrine:fixtures:load --append --no-interaction");
 
 
