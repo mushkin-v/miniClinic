@@ -32,7 +32,7 @@ FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationCompleted',
 
 public function onRegistrationCompleted(FormEvent $event)
 {
-$url = $this->router->generate('homepage');
+$url = $this->router->generate('docRegister');
 
 $event->setResponse(new RedirectResponse($url));
 }
