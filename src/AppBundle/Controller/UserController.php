@@ -94,43 +94,8 @@ class UserController extends Controller
             ]);
     }
 
-
-    /**
-     * @Route("/docLoginRegister", name="docLoginRegister")
-     * @Security("has_role('ROLE_SUPER_ADMIN') and is_granted('ROLE_SUPER_ADMIN')")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function docLoginRegisterAction(Request $request)
-    {
-        $user = new User();
-
-        $form = $this->createForm(new DoctorLoginType(), $user);
-
-        $form->setData($user);
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $user
-                ->setIsDoctor(true)
-                ->setEnabled('true')
-                ->setRoles(array(User::ROLE_DEFAULT))
-            ;
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('docRegister',array('slug'=>$user->getId())), 301);
-        }
-
-        return $this->render('User/docLoginRegister.html.twig',
-            [
-                'form' => $form->createView(),
-            ]);
-    }
-
     /**
      * @Route("/docRegister/{slug}", name="docRegister")
-     * @Security("has_role('ROLE_SUPER_ADMIN') and is_granted('ROLE_SUPER_ADMIN')")
      * @param $slug
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -145,7 +110,7 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $doctorLogin = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')
-                ->findOneById($slug);
+                ->findOneByusername($slug);
             $doctor->setEmail($doctorLogin->getEmail());
             $doctor->setCardNumber($doctorLogin->getCardNumber());
             $doctor->setUser($doctorLogin);

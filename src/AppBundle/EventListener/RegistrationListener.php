@@ -7,33 +7,38 @@ use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
 * Listener responsible to change the redirection at the end of the password resetting
 */
 class RegistrationListener implements EventSubscriberInterface
 {
-private $router;
+    private $router;
+    protected $requestStack;
 
-public function __construct(UrlGeneratorInterface $router)
-{
-$this->router = $router;
-}
+    public function __construct(UrlGeneratorInterface $router, RequestStack $requestStack)
+    {
+        $this->router = $router;
+        $this->requestStack = $requestStack;
+    }
 
-/**
-* {@inheritDoc}
-*/
-public static function getSubscribedEvents()
-{
-return array(
-FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationCompleted',
-);
-}
+    /**
+    * {@inheritDoc}
+    */
+    public static function getSubscribedEvents()
+    {
+        return array(
+          FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationCompleted',
+        );
+    }
 
-public function onRegistrationCompleted(FormEvent $event)
-{
-$url = $this->router->generate('pacientRegister');
+    public function onRegistrationCompleted(FormEvent $event)
+    {
+        $request = $this->requestStack->getCurrentRequest()->request->get('fos_user_registration_form');
+        $isDoctor = isset($request['isDoctor'])?$request['isDoctor']:0;
+        $url = $isDoctor==1? $this->router->generate('docRegister',array('slug'=>$request['username'])): $this->router->generate('pacientRegister');
 
-$event->setResponse(new RedirectResponse($url));
-}
+        $event->setResponse(new RedirectResponse($url));
+    }
 }
