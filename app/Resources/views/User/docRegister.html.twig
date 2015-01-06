@@ -47,10 +47,6 @@
             <div class="col-sm-6">{{ form_widget(form.other_info, {'attr': {'class': 'form-control ', 'style':'height: 200px'}}) }}</div>
         </div>
 
-        <input type="hidden" name="{{ form.card_number.vars.full_name }}" value="{{ app.user.getCardNumber  }}">
-
-        <input type="hidden" name="{{ form.email.vars.full_name }}" value="{{ app.user.getEmail  }}">
-
         <div class=" form-group">
             <input class="col-md-offset-7 blogin btn btn-primary" type="submit" value="{{ 'registration.submit'|trans({},'FOSUserBundle') }}" />
         </div>

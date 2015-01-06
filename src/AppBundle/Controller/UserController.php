@@ -146,6 +146,8 @@ class UserController extends Controller
         if ($form->isValid()) {
             $doctorLogin = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')
                 ->findOneById($slug);
+            $doctor->setEmail($doctorLogin->getEmail());
+            $doctor->setCardNumber($doctorLogin->getCardNumber());
             $doctor->setUser($doctorLogin);
             $this->getDoctrine()->getManager()->persist($doctor);
             $this->getDoctrine()->getManager()->flush();
