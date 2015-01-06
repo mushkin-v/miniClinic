@@ -113,6 +113,10 @@ class Doctor
      */
     private $deletedAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity="user")
+     */
+    private $user;
 
     /**
      * Get id
@@ -398,5 +402,28 @@ class Doctor
     public function getDeletedAt()
     {
         return $this->deletedAt;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\user $user
+     * @return Doctor
+     */
+    public function setUser(\AppBundle\Entity\user $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\user 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

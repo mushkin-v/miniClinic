@@ -23,6 +23,12 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="is_doctor", type="boolean")
+     */
+    protected $isDoctor = false;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="card_number", type="integer", unique=true)
@@ -75,5 +81,28 @@ class User extends BaseUser
     public function getCardNumber()
     {
         return $this->card_number;
+    }
+
+    /**
+     * Set isDoctor
+     *
+     * @param boolean $isDoctor
+     * @return User
+     */
+    public function setIsDoctor($isDoctor)
+    {
+        $this->isDoctor = $isDoctor;
+
+        return $this;
+    }
+
+    /**
+     * Get isDoctor
+     *
+     * @return boolean 
+     */
+    public function getIsDoctor()
+    {
+        return $this->isDoctor;
     }
 }
