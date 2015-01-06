@@ -13,7 +13,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        return $this->getUser()==true? $this->render('default/index.html.twig'): $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     /**
@@ -21,7 +21,9 @@ class DefaultController extends Controller
      */
     public function personalAction()
     {
-        return $this->render('default/personal.html.twig');
+        return $this->render('default/personal.html.twig',[
+            'doctors' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')->findAll()
+        ]);
     }
 
     /**
@@ -39,6 +41,7 @@ class DefaultController extends Controller
     {
         return $this->render('default/services.html.twig');
     }
+
     /**
      * @Route("/adminPanel", name="adminPanel")
      * @Security("has_role('ROLE_SUPER_ADMIN') and is_granted('ROLE_SUPER_ADMIN')")

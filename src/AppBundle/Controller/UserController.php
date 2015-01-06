@@ -151,7 +151,7 @@ class UserController extends Controller
             $doctor->setUser($doctorLogin);
             $this->getDoctrine()->getManager()->persist($doctor);
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirect($this->generateUrl('personal'));
         }
 
         return $this->render('User/docRegister.html.twig',
