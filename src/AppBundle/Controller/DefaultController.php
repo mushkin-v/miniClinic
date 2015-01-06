@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DefaultController extends Controller
 {
@@ -37,5 +38,13 @@ class DefaultController extends Controller
     public function servicesAction()
     {
         return $this->render('default/services.html.twig');
+    }
+    /**
+     * @Route("/adminPanel", name="adminPanel")
+     * @Security("has_role('ROLE_SUPER_ADMIN') and is_granted('ROLE_SUPER_ADMIN')")
+     */
+    public function adminPanelAction()
+    {
+        return $this->render('default/adminPanel.html.twig');
     }
 }

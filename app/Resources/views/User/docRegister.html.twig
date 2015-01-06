@@ -3,7 +3,7 @@
 {% block content %}
 <h3>Hello doctor, please fill in your details:</h3><br>
 
-<form action="{{ path('docRegister') }}" {{ form_enctype(form) }} method="POST">
+<form action="{{ path('docRegister', {'slug':slug}) }}" {{ form_enctype(form) }} method="POST">
     <div class="form-horizontal col-md-12">
         <div class="form-group">
             <div class="col-sm-12">{{ form_errors(form.name) }}</div>
