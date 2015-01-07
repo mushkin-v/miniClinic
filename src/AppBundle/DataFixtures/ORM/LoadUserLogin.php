@@ -22,9 +22,7 @@ class LoadUserLogin extends AbstractFixture implements OrderedFixtureInterface
             ->setPlainPassword('user')
             ->setEnabled('true')
             ->setCardNumber(1)
-            ->setEmailCanonical('user@user.com')
             ->setRoles(array(User::ROLE_DEFAULT))
-            ->setUsernameCanonical('user')
         ;
 
         $manager->persist($user);

@@ -124,4 +124,24 @@ class UserController extends Controller
                 'form' => $form->createView(),
             ]);
     }
+    /**
+     * @Route("/sendEmail", name="sendEmail")
+     */
+    public function sendEmailAction(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $name = $request->request->get('name');
+            $email = $request->request->get('description');
+            $phone = $request->request->get('name');
+            $message = $request->request->get('name');
+            $this->get('vitmail')->Send(
+                'This letter from' . $name . ' my phone number ' . $phone,
+                $email,
+                $this->getDoctrine()->getManager()->getRepository('AppBundle:User')
+                    ->findOneByusername('admin')->getEmail(),
+                $message
+            );
+        }
+        return $this->redirect($this->generateUrl('contact',['infoline'=>'Your message has been send! Thank you!']));
+    }
 }

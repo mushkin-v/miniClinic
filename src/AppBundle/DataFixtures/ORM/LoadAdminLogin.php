@@ -18,13 +18,11 @@ class LoadAdminLogin extends AbstractFixture implements OrderedFixtureInterface
         $admin
             ->setIsDoctor(false)
             ->setUsername('admin')
-            ->setEmail('admin@admin.com')
+            ->setEmail('miniclinic2015@gmail.com')
             ->setPlainPassword('admin')
             ->setEnabled('true')
             ->setCardNumber(0)
-            ->setEmailCanonical('admin@admin.com')
             ->setRoles(array(User::ROLE_SUPER_ADMIN))
-            ->setUsernameCanonical('admin')
         ;
 
         $manager->persist($admin);

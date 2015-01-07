@@ -22,9 +22,7 @@ class LoadDoctorLogin extends AbstractFixture implements OrderedFixtureInterface
             ->setPlainPassword('doctor')
             ->setEnabled('true')
             ->setCardNumber(2)
-            ->setEmailCanonical('doctor@doctor.com')
             ->setRoles(array(User::ROLE_DEFAULT))
-            ->setUsernameCanonical('doctor')
         ;
 
         $manager->persist($doctor);

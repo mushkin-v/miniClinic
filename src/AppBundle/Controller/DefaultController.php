@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
@@ -27,11 +28,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/contact/{infoline}", name="contact", defaults={"infoline" = null})
+     * @param $infoline
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function contactAction()
+    public function contactAction($infoline)
     {
-        return $this->render('default/contact.html.twig');
+        return $this->render('default/contact.html.twig',array('infoline'=>$infoline));
     }
 
     /**
