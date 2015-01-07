@@ -10,3 +10,39 @@
 .footer {
     text-align: center;
 }
+
+.navbar-med{
+    background-color: #042f2c;
+}
+
+.img-logo{
+    height: 50px;
+}
+
+.index-text{
+    text-align: justify;
+}
+
+.index-welcome{
+    background-color: #12d4c7;
+}
+
+.index-text-img-left{
+    float: left;
+    height: 150px;
+    margin-right: 10px;
+}
+
+.index-text-img-right{
+    float: right;
+    height: 150px;
+    margin-left: 10px;
+}
+
+.login-img{
+    width: 180px;
+}
+
+.img-personal{
+    width: 200px;
+}

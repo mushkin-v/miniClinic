@@ -3,38 +3,40 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\User;
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class LoadData implements FixtureInterface
+class LoadUserLogin extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        //$container = new ContainerBuilder();
-        //$userManager = $container->get('fos_user.user_manager');
-
         $user = new User();
         $user
+            ->setIsDoctor(false)
             ->setUsername('user')
             ->setEmail('user@user.com')
             ->setPlainPassword('user')
             ->setEnabled('true')
             ->setCardNumber(1)
-            ->setEmailCanonical('user@user.com')
             ->setRoles(array(User::ROLE_DEFAULT))
-            ->setUsernameCanonical('user')
         ;
-
-        //$FOSUser = $userManager->createUser($user, false);
-
-        //$userManager->updateUser($user);
 
         $manager->persist($user);
 
         $manager->flush();
+
+        $this->addReference('user', $user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 3; // the order in which fixtures will be loaded
     }
 }
