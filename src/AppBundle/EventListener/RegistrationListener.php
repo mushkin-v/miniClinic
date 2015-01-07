@@ -36,8 +36,7 @@ class RegistrationListener implements EventSubscriberInterface
     public function onRegistrationCompleted(FormEvent $event)
     {
         $request = $this->requestStack->getCurrentRequest()->request->get('fos_user_registration_form');
-        $isDoctor = isset($request['isDoctor'])?$request['isDoctor']:0;
-        $url = $isDoctor==1? $this->router->generate('docRegister',array('slug'=>$request['username'])): $this->router->generate('pacientRegister');
+        $url = isset($request['isDoctor'])? $this->router->generate('docRegister',array('slug'=>$request['username'])): $this->router->generate('pacientRegister');
 
         $event->setResponse(new RedirectResponse($url));
     }

@@ -4,7 +4,7 @@
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         <div class="form-group">
             {{ form_errors(form.isDoctor) }}
-            {{ form_label(form.isDoctor, 'Are you a doctor?') }}
+            {{ form_label(form.isDoctor, 'Create a doctor?') }}
             {{ form_widget(form.isDoctor) }}
         </div>
     {% endif %}
