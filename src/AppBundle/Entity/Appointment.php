@@ -25,14 +25,14 @@ class Appointment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppointmentTime", inversedBy="appointment")
+     * @ORM\OneToMany(targetEntity="AppointmentTime", mappedBy="appointment", cascade={"persist"})
      **/
     private $time;
 
     /**
-     * @ORM\OneToMany(targetEntity="Doctor", mappedBy="appointments")
+     * @ORM\ManyToOne(targetEntity="Doctor", inversedBy="appointments")
      **/
-    private $doctors;
+    private $doctor;
 
     /**
      * @ORM\Column(name="date", type="datetime")
@@ -50,12 +50,13 @@ class Appointment
      */
     private $deletedAt;
 
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->doctors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->time = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -89,62 +90,6 @@ class Appointment
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Set time
-     *
-     * @param \AppBundle\Entity\AppointmentTime $time
-     * @return Appointment
-     */
-    public function setTime(\AppBundle\Entity\AppointmentTime $time = null)
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-
-    /**
-     * Get time
-     *
-     * @return \AppBundle\Entity\AppointmentTime 
-     */
-    public function getTime()
-    {
-        return $this->time;
-    }
-
-    /**
-     * Add doctors
-     *
-     * @param \AppBundle\Entity\Doctor $doctors
-     * @return Appointment
-     */
-    public function addDoctor(\AppBundle\Entity\Doctor $doctors)
-    {
-        $this->doctors[] = $doctors;
-
-        return $this;
-    }
-
-    /**
-     * Remove doctors
-     *
-     * @param \AppBundle\Entity\Doctor $doctors
-     */
-    public function removeDoctor(\AppBundle\Entity\Doctor $doctors)
-    {
-        $this->doctors->removeElement($doctors);
-    }
-
-    /**
-     * Get doctors
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getDoctors()
-    {
-        return $this->doctors;
     }
 
     /**
@@ -191,5 +136,63 @@ class Appointment
     public function getDeletedAt()
     {
         return $this->deletedAt;
+    }
+
+    /**
+     * Add time
+     *
+     * @param \AppBundle\Entity\AppointmentTime $time
+     * @return Appointment
+     */
+    public function addTime(\AppBundle\Entity\AppointmentTime $time)
+    {
+        $this->time[] = $time;
+
+        $time->setAppointment($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove time
+     *
+     * @param \AppBundle\Entity\AppointmentTime $time
+     */
+    public function removeTime(\AppBundle\Entity\AppointmentTime $time)
+    {
+        $this->time->removeElement($time);
+    }
+
+    /**
+     * Get time
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * Set doctor
+     *
+     * @param \AppBundle\Entity\Doctor $doctor
+     * @return Appointment
+     */
+    public function setDoctor(\AppBundle\Entity\Doctor $doctor = null)
+    {
+        $this->doctor = $doctor;
+
+        return $this;
+    }
+
+    /**
+     * Get doctor
+     *
+     * @return \AppBundle\Entity\Doctor 
+     */
+    public function getDoctor()
+    {
+        return $this->doctor;
     }
 }

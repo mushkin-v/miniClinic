@@ -25,7 +25,7 @@ class AppointmentTime
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Appointment", mappedBy="time")
+     * @ORM\ManyToOne(targetEntity="Appointment", inversedBy="time")
      **/
     private $appointment;
 
@@ -54,14 +54,7 @@ class AppointmentTime
      * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
      */
     private $deletedAt;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->appointment = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    
 
     /**
      * Get id
@@ -120,62 +113,6 @@ class AppointmentTime
     }
 
     /**
-     * Add appointment
-     *
-     * @param \AppBundle\Entity\Appointment $appointment
-     * @return AppointmentTime
-     */
-    public function addAppointment(\AppBundle\Entity\Appointment $appointment)
-    {
-        $this->appointment[] = $appointment;
-
-        return $this;
-    }
-
-    /**
-     * Remove appointment
-     *
-     * @param \AppBundle\Entity\Appointment $appointment
-     */
-    public function removeAppointment(\AppBundle\Entity\Appointment $appointment)
-    {
-        $this->appointment->removeElement($appointment);
-    }
-
-    /**
-     * Get appointment
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAppointment()
-    {
-        return $this->appointment;
-    }
-
-    /**
-     * Set pacient
-     *
-     * @param \AppBundle\Entity\Pacient $pacient
-     * @return AppointmentTime
-     */
-    public function setPacient(\AppBundle\Entity\Pacient $pacient = null)
-    {
-        $this->pacient = $pacient;
-
-        return $this;
-    }
-
-    /**
-     * Get pacient
-     *
-     * @return \AppBundle\Entity\Pacient 
-     */
-    public function getPacient()
-    {
-        return $this->pacient;
-    }
-
-    /**
      * Set created
      *
      * @param \DateTime $created
@@ -219,5 +156,51 @@ class AppointmentTime
     public function getDeletedAt()
     {
         return $this->deletedAt;
+    }
+
+    /**
+     * Set appointment
+     *
+     * @param \AppBundle\Entity\Appointment $appointment
+     * @return AppointmentTime
+     */
+    public function setAppointment(\AppBundle\Entity\Appointment $appointment = null)
+    {
+        $this->appointment = $appointment;
+
+        return $this;
+    }
+
+    /**
+     * Get appointment
+     *
+     * @return \AppBundle\Entity\Appointment 
+     */
+    public function getAppointment()
+    {
+        return $this->appointment;
+    }
+
+    /**
+     * Set pacient
+     *
+     * @param \AppBundle\Entity\Pacient $pacient
+     * @return AppointmentTime
+     */
+    public function setPacient(\AppBundle\Entity\Pacient $pacient = null)
+    {
+        $this->pacient = $pacient;
+
+        return $this;
+    }
+
+    /**
+     * Get pacient
+     *
+     * @return \AppBundle\Entity\Pacient 
+     */
+    public function getPacient()
+    {
+        return $this->pacient;
     }
 }

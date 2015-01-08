@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Appointment;
 use AppBundle\Entity\Doctor;
 use AppBundle\Entity\Pacient;
 use AppBundle\Entity\PacientHistory;
 use AppBundle\Entity\User;
+use AppBundle\Form\Type\AppointmentType;
 use AppBundle\Form\Type\DoctorType;
 use AppBundle\Form\Type\DoctorLoginType;
 use AppBundle\Form\Type\PacientHistoryType;
@@ -20,6 +22,8 @@ class DocController extends Controller
 {
     /**
      * @Route("/docOffice/{infoline}", name="docOffice", defaults={"infoline" = null})
+     * @param $infoline
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function docOfficeAction($infoline)
     {
@@ -27,7 +31,38 @@ class DocController extends Controller
     }
 
     /**
+     * @Route("/createNewAppointment", name="createNewAppointment")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function createNewAppointmentAction(Request $request)
+    {
+        $appointment = new Appointment();
+
+        $form = $this->createForm(new AppointmentType(), $appointment);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $doctor = $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')
+                ->findOneByuser($this->getUser());
+            $appointment->setDoctor($doctor);
+            $this->getDoctrine()->getManager()->persist($appointment);
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirect($this->generateUrl('docOffice',['infoline'=>'New appointment was created!']));
+        }
+
+        return $this->render('User/DocOffice/createNewAppointment.html.twig',
+            [
+                'form' => $form->createView(),
+                'time' => $this->getDoctrine()->getManager()
+                    ->getRepository('AppBundle:AppointmentTime')->findAll(),
+            ]);
+    }
+
+    /**
      * @Route("/docPacientHistory", name="docPacientHistory")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function docPacientHistoryAction()
     {
@@ -50,6 +85,7 @@ class DocController extends Controller
 
     /**
      * @Route("/allPacientHistory", name="allPacientHistory")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function allPacientHistoryAction()
     {
@@ -70,7 +106,6 @@ class DocController extends Controller
     {
         $history = new PacientHistory();
 
-
         $form = $this->createForm(new PacientHistoryType(), $history);
 
         $form->handleRequest($request);
@@ -89,7 +124,6 @@ class DocController extends Controller
                 'form' => $form->createView(),
             ]);
     }
-
 
     /**
      * @Route("/docAccount", name="docAccount")

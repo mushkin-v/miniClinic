@@ -25,7 +25,7 @@ class Doctor
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Appointment", inversedBy="doctors")
+     * @ORM\OneToMany(targetEntity="Appointment", mappedBy="doctors")
      **/
     private $appointments;
 
@@ -138,6 +138,7 @@ class Doctor
      */
     public function __construct()
     {
+        $this->appointments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pacients = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -428,22 +429,32 @@ class Doctor
     }
 
     /**
-     * Set appointments
+     * Add appointments
      *
      * @param \AppBundle\Entity\Appointment $appointments
      * @return Doctor
      */
-    public function setAppointments(\AppBundle\Entity\Appointment $appointments = null)
+    public function addAppointment(\AppBundle\Entity\Appointment $appointments)
     {
-        $this->appointments = $appointments;
+        $this->appointments[] = $appointments;
 
         return $this;
     }
 
     /**
+     * Remove appointments
+     *
+     * @param \AppBundle\Entity\Appointment $appointments
+     */
+    public function removeAppointment(\AppBundle\Entity\Appointment $appointments)
+    {
+        $this->appointments->removeElement($appointments);
+    }
+
+    /**
      * Get appointments
      *
-     * @return \AppBundle\Entity\Appointment 
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getAppointments()
     {
