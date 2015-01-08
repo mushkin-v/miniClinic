@@ -17,14 +17,15 @@
             <h2 class="page-header">Our Team</h2>
         </div>
         {% for doctor in doctors %}
-        <div class="col-lg-4 col-sm-6 text-center">
-            <img class="img-personal img-circle img-center" src="{{  asset('bundles/app/images/doctors/doctor%this%.jpg'|replace({'%this%': loop.index })) }}" alt="">
-
-            <h3>{{ doctor.name }} {{ doctor.lastname }} </br> {{ doctor.surname }} </br>
-                <small>{{ doctor.jobTitle }}</small>
-            </h3>
-            <p>{{ doctor.otherInfo }}</p>
-        </div>
+            {% if loop.first %} {% else %}
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-personal img-circle img-center" src="{{  asset('bundles/app/images/doctors/doctor%this%.jpg'|replace({'%this%': loop.index })) }}" alt="">
+                <h3>{{ doctor.name }} {{ doctor.lastname }} </br> {{ doctor.surname }} </br>
+                    <small>{{ doctor.jobTitle }}</small>
+                </h3>
+                <p>{{ doctor.otherInfo }}</p>
+            </div>
+            {% endif %}
         {% endfor %}
     </div>
 
