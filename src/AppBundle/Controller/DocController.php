@@ -31,6 +31,36 @@ class DocController extends Controller
     }
 
     /**
+     * @Route("/allAppointmentsHistory", name="allAppointmentsHistory")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function allAppointmentsHistoryAction()
+    {
+        return $this->render(
+            'User/DocOffice/allAppointmentsHistory.html.twig',
+            array(
+                'appointments' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Appointment')
+                    ->findAll(),
+            ));
+    }
+
+    /**
+     * @Route("/docAppointmentsHistory", name="docAppointmentsHistory")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function docAppointmentsHistoryAction()
+    {
+        return $this->render(
+            'User/DocOffice/docAppointmentsHistory.html.twig',
+            array(
+                'doctor' =>$this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')
+                    ->findOneByuser($this->getUser()),
+                'appointments' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Appointment')
+                    ->findAll(),
+            ));
+    }
+
+    /**
      * @Route("/createNewAppointment", name="createNewAppointment")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
