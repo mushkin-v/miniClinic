@@ -142,6 +142,6 @@ class UserController extends Controller
                 $message
             );
         }
-        return $this->redirect($this->generateUrl('contact',['infoline'=>'Your message has been send! Thank you!']));
+        return $this->redirect($this->generateUrl('contact',['infoline'=>'Your message have been sent! Thank you!']));
     }
 }

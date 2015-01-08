@@ -25,6 +25,16 @@ class Pacient
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="AppointmentTime", inversedBy="pacient")
+    **/
+    private $appointmentTime;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PacientHistory", inversedBy="pacient")
+     **/
+    private $history;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="card_number", type="string", length=255)
@@ -365,5 +375,51 @@ class Pacient
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set appointmentTime
+     *
+     * @param \AppBundle\Entity\AppointmentTime $appointmentTime
+     * @return Pacient
+     */
+    public function setAppointmentTime(\AppBundle\Entity\AppointmentTime $appointmentTime = null)
+    {
+        $this->appointmentTime = $appointmentTime;
+
+        return $this;
+    }
+
+    /**
+     * Get appointmentTime
+     *
+     * @return \AppBundle\Entity\AppointmentTime 
+     */
+    public function getAppointmentTime()
+    {
+        return $this->appointmentTime;
+    }
+
+    /**
+     * Set history
+     *
+     * @param \AppBundle\Entity\PacientHistory $history
+     * @return Pacient
+     */
+    public function setHistory(\AppBundle\Entity\PacientHistory $history = null)
+    {
+        $this->history = $history;
+
+        return $this;
+    }
+
+    /**
+     * Get history
+     *
+     * @return \AppBundle\Entity\PacientHistory 
+     */
+    public function getHistory()
+    {
+        return $this->history;
     }
 }

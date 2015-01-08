@@ -25,6 +25,17 @@ class Doctor
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Appointment", inversedBy="doctors")
+     **/
+    private $appointments;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="PacientHistory", inversedBy="doctors")
+     * @ORM\JoinTable(name="doctor_pacienthistory")
+    */
+    private $pacients;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="card_number", type="string", length=255)
@@ -425,5 +436,68 @@ class Doctor
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pacients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set appointments
+     *
+     * @param \AppBundle\Entity\Appointment $appointments
+     * @return Doctor
+     */
+    public function setAppointments(\AppBundle\Entity\Appointment $appointments = null)
+    {
+        $this->appointments = $appointments;
+
+        return $this;
+    }
+
+    /**
+     * Get appointments
+     *
+     * @return \AppBundle\Entity\Appointment 
+     */
+    public function getAppointments()
+    {
+        return $this->appointments;
+    }
+
+    /**
+     * Add pacients
+     *
+     * @param \AppBundle\Entity\PacientHistory $pacients
+     * @return Doctor
+     */
+    public function addPacient(\AppBundle\Entity\PacientHistory $pacients)
+    {
+        $this->pacients[] = $pacients;
+
+        return $this;
+    }
+
+    /**
+     * Remove pacients
+     *
+     * @param \AppBundle\Entity\PacientHistory $pacients
+     */
+    public function removePacient(\AppBundle\Entity\PacientHistory $pacients)
+    {
+        $this->pacients->removeElement($pacients);
+    }
+
+    /**
+     * Get pacients
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPacients()
+    {
+        return $this->pacients;
     }
 }
