@@ -25,7 +25,7 @@ class Doctor
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Appointment", mappedBy="doctors")
+     * @ORM\OneToMany(targetEntity="Appointment", mappedBy="doctor")
      **/
     private $appointments;
 

@@ -54,13 +54,20 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
+            var $collectionHolder;
+
         // setup an "add a tag" link
-        var $addTagLink = $('<a href="#" role="button" class="btn btn-sm btn-success add_tag_link">Add time</a>');
-        var $newLinkLi = $('<li class="form-group col-sm-8"></li>').append($addTagLink);
+            var $addTagLink = $('<a href="#" role="button" class="btn btn-sm btn-success add_tag_link">Add time</a>');
+            var $newLinkLi = $('<li class="form-group col-sm-8"></li>').append($addTagLink);
 
         jQuery(document).ready(function() {
             // Get the ul that holds the collection of tags
-            var $collectionHolder = $('ul.time');
+            $collectionHolder = $('ul.time');
+
+            // add a delete link to all of the existing tag form li elements
+            $collectionHolder.find('li').each(function() {
+                addTagFormDeleteLink($(this));
+            });
 
             // add the "add a tag" anchor and li to the tags ul
             $collectionHolder.append($newLinkLi);
@@ -73,11 +80,9 @@
                 // prevent the link from creating a "#" on the URL
                 e.preventDefault();
 
-                // add a new tag form (see code block below)
+                // add a new tag form (see next code block)
                 addTagForm($collectionHolder, $newLinkLi);
             });
-
-
         });
 
         function addTagForm($collectionHolder, $newLinkLi) {
@@ -87,7 +92,7 @@
             // get the new index
             var index = $collectionHolder.data('index');
 
-            // Replace '$$name$$' in the prototype's HTML to
+            // Replace '__name__' in the prototype's HTML to
             // instead be a number based on how many items we have
             var newForm = prototype.replace(/__name__/g, index);
 
@@ -96,33 +101,23 @@
 
             // Display the form in the page in an li, before the "Add a tag" link li
             var $newFormLi = $('<li class="form-group col-sm-8"></li>').append(newForm);
-
             $newLinkLi.before($newFormLi);
 
-            // add a delete link to the new form
             addTagFormDeleteLink($newFormLi);
+        };
 
-            // handle the removal, just for this example
-            $('.remove-tag').click(function(e) {
-                e.preventDefault();
+            function addTagFormDeleteLink($tagFormLi) {
+                var $removeFormA = $('<a role="button" class="btn btn-sm btn-danger" href="#">delete time</a>');
+                $tagFormLi.append($removeFormA);
 
-                $(this).parent().remove();
+                $removeFormA.on('click', function(e) {
+                    // prevent the link from creating a "#" on the URL
+                    e.preventDefault();
 
-                return false;
-            });
-        }
+                    // remove the li for the tag form
+                    $tagFormLi.remove();
+                });
+            };
 
-        function addTagFormDeleteLink($tagFormLi) {
-            var $removeFormA = $('<a role="button" class="btn btn-sm btn-danger" href="#">Delete time</a>');
-            $tagFormLi.append($removeFormA);
-
-            $removeFormA.on('click', function(e) {
-                // prevent the link from creating a "#" on the URL
-                e.preventDefault();
-
-                // remove the li for the tag form
-                $tagFormLi.remove();
-            });
-        }
     </script>
 {% endblock %}

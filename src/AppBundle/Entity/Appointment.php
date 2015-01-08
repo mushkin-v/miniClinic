@@ -49,8 +49,7 @@ class Appointment
      * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
      */
     private $deletedAt;
-
-
+    
     /**
      * Constructor
      */
@@ -148,7 +147,7 @@ class Appointment
     {
         $this->time[] = $time;
 
-        $time->setAppointment($this);
+        $time->setAppoigitntment($this);
 
         return $this;
     }
