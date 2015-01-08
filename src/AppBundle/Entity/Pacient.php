@@ -30,7 +30,7 @@ class Pacient
     private $appointmentTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PacientHistory", inversedBy="pacient")
+     * @ORM\OneToMany(targetEntity="PacientHistory", mappedBy="pacient")
      **/
     private $history;
 
@@ -421,5 +421,40 @@ class Pacient
     public function getHistory()
     {
         return $this->history;
+    }
+
+    public function __toString()
+    {
+        return $this->getName().' '.$this->getLastname().' '.$this->getSurname();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->history = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add history
+     *
+     * @param \AppBundle\Entity\PacientHistory $history
+     * @return Pacient
+     */
+    public function addHistory(\AppBundle\Entity\PacientHistory $history)
+    {
+        $this->history[] = $history;
+
+        return $this;
+    }
+
+    /**
+     * Remove history
+     *
+     * @param \AppBundle\Entity\PacientHistory $history
+     */
+    public function removeHistory(\AppBundle\Entity\PacientHistory $history)
+    {
+        $this->history->removeElement($history);
     }
 }

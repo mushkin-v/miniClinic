@@ -1,6 +1,7 @@
 {% extends ":default:index.html.twig" %}
 
 {% block content %}
+{% if app.user.getIsDoctor == true %}
 <h3>Welcome Doctor {{ app.user.getUserName }}, you can update your details:</h3><br>
 <form action="{{ path('docAccount') }}" {{ form_enctype(form) }} method="POST">
     <div class="form-horizontal col-md-12">
@@ -54,6 +55,7 @@
 
     </div>
 </form>
+{% endif %}
 {% endblock content %}
 
 

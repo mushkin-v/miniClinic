@@ -18,14 +18,14 @@ class LoadDoctorInfo extends AbstractFixture implements OrderedFixtureInterface
         $doctor = new Doctor();
         $doctor
             ->setCardNumber($user->getCardNumber())
-            ->setName('Doctor')
-            ->setLastname('Doctor Lastname')
-            ->setSurname('Doctor Surname')
+            ->setName('Ivan')
+            ->setLastname('Ivanovich')
+            ->setSurname('Ivanov')
             ->setAge(50)
-            ->setAdress('Doctor Adress')
-            ->setPhone('Doctor Phone')
+            ->setAdress('USA, New Yourk, Shevchenko st., 50/1')
+            ->setPhone('+38093-123-12-12')
             ->setJobTitle('Heads Doctor')
-            ->setOtherInfo('Heads Doctor Info')
+            ->setOtherInfo('Doctor of the year 2013-2014')
             ->setEmail($user->getEmail())
             ->setUser($user)
         ;

@@ -39,9 +39,18 @@
                </li>
 
                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                  <li>
-                     <a href="#">Appointments</a>
-                  </li>
+                  {% if app.user.getIsDoctor == true %}
+                     <!-- Page Doctor Content -->
+                     <li>
+                        <a href="{{ path('docOffice') }}">Doctor's office</a>
+                     </li>
+                  {% else %}
+                     <!-- Page Pacient Content -->
+                     <li>
+                        <a href="#">Appointments</a>
+                     </li>
+                  {% endif %}
+
                {% endif %}
                {% if is_granted('ROLE_SUPER_ADMIN') %}
                   <li>

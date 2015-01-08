@@ -4,9 +4,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Doctor;
 use AppBundle\Entity\Pacient;
+use AppBundle\Entity\PacientHistory;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\DoctorType;
 use AppBundle\Form\Type\DoctorLoginType;
+use AppBundle\Form\Type\PacientHistoryType;
 use AppBundle\Form\Type\PacientType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,59 +16,80 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
-class UserController extends Controller
+class DocController extends Controller
 {
     /**
-     * @Route("/pacientRegister", name="pacientRegister")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Route("/docOffice/{infoline}", name="docOffice", defaults={"infoline" = null})
      */
-    public function pacientRegisterAction(Request $request)
+    public function docOfficeAction($infoline)
     {
-        $pacient = new Pacient();
-
-        $form = $this->createForm(new PacientType(), $pacient);
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $pacient->setUser($this->getUser());
-            $this->getDoctrine()->getManager()->persist($pacient);
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
-        return $this->render('User/pacientRegister.html.twig',
-            [
-                'form' => $form->createView(),
-            ]);
+        return $this->render('User/docOffice.html.twig',array('infoline'=>$infoline));
     }
 
     /**
-     * @Route("/pacientAccount", name="pacientAccount")
+     * @Route("/docPacientHistory", name="docPacientHistory")
+     */
+    public function docPacientHistoryAction()
+    {
+        $docPacientsHistories = $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')
+            ->findOneByuser($this->getUser())->getPacients();
+        foreach($docPacientsHistories as $history){
+            $pacients[] = $history->getPacient();
+        }
+
+        return isset($pacients)?
+            $this->render(
+            'User/DocOffice/docPacientHistory.html.twig',
+            array(
+            'docPacients' => array_unique($pacients),
+            )):
+            $this->redirect($this->generateUrl(
+                'docOffice',['infoline'=>'You have no pacients!']))
+            ;
+    }
+
+    /**
+     * @Route("/allPacientHistory", name="allPacientHistory")
+     */
+    public function allPacientHistoryAction()
+    {
+        return $this->render(
+            'User/DocOffice/allPacientHistory.html.twig',
+            array(
+                'pacients' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Pacient')
+                    ->findAll(),
+            ));
+    }
+
+    /**
+     * @Route("/createPacientHistory", name="createPacientHistory")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function pacientAccountAction(Request $request)
+    public function createPacientHistoryAction(Request $request)
     {
-        $pacient = $this->getDoctrine()->getManager()->getRepository('AppBundle:Pacient')
-            ->findOneByuser($this->getUser());
+        $history = new PacientHistory();
 
-        $form = $this->createForm(new PacientType(), $pacient);
+
+        $form = $this->createForm(new PacientHistoryType(), $history);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($pacient);
+            $doctor = $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')
+                ->findOneByuser($this->getUser());
+            $history->setDoctors($doctor);
+            $this->getDoctrine()->getManager()->persist($history);
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirect($this->generateUrl('docOffice',['infoline'=>'Pacient history was created!']));
         }
 
-        return $this->render('User/pacientAccount.html.twig',
+        return $this->render('User/DocOffice/createPacientHistory.html.twig',
             [
                 'form' => $form->createView(),
             ]);
     }
+
 
     /**
      * @Route("/docAccount", name="docAccount")
@@ -120,28 +143,9 @@ class UserController extends Controller
         }
 
         return $this->render('User/docRegister.html.twig',
-            [   'slug' => $slug,
+            [
+                'slug' => $slug,
                 'form' => $form->createView(),
             ]);
-    }
-    /**
-     * @Route("/sendEmail", name="sendEmail")
-     */
-    public function sendEmailAction(Request $request)
-    {
-        if ($request->isMethod('POST')) {
-            $name = $request->request->get('name');
-            $email = $request->request->get('description');
-            $phone = $request->request->get('name');
-            $message = $request->request->get('name');
-            $this->get('vitmail')->Send(
-                'This letter from' . $name . ' my phone number ' . $phone,
-                $email,
-                $this->getDoctrine()->getManager()->getRepository('AppBundle:User')
-                    ->findOneByusername('admin')->getEmail(),
-                $message
-            );
-        }
-        return $this->redirect($this->generateUrl('contact',['infoline'=>'Your message have been sent! Thank you!']));
     }
 }

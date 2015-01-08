@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Doctor;
 use AppBundle\Entity\Pacient;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -15,8 +16,9 @@ class LoadAdminInfo extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $admin = $this->getReference('admin');
-        $pacient = new Pacient();
-        $pacient
+
+        $doctor = new Doctor();
+        $doctor
             ->setCardNumber($admin->getCardNumber())
             ->setName('Admin')
             ->setLastname('Admin Lastname')
@@ -24,11 +26,13 @@ class LoadAdminInfo extends AbstractFixture implements OrderedFixtureInterface
             ->setAge(100)
             ->setAdress('Admin Adress')
             ->setPhone('Admin Phone')
+            ->setJobTitle('Admin Heads Doctor')
+            ->setOtherInfo('ADmin Heads Doctor Info')
             ->setEmail($admin->getEmail())
             ->setUser($admin)
         ;
 
-        $manager->persist($pacient);
+        $manager->persist($doctor);
 
         $manager->flush();
     }

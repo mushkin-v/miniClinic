@@ -1,0 +1,27 @@
+{% extends ":User:docOffice.html.twig" %}
+
+{% block DocContent %}
+    {% if app.user.getIsDoctor == true %}
+     <h3>Your pacients histories:</h3><br>
+        <ol>
+            {% for pacient in docPacients %}
+                <li>
+                    <p class="text-primary">Pacient: {{ pacient }}</p>
+                    <p>Card number: {{ pacient.cardNumber }}, age: {{ pacient.age }}</p>
+                    <p>Adress: {{ pacient.adress }}, phone: {{ pacient.phone }}</p>
+                    <ol>
+                        {% for history in pacient.history %}
+                            <li>
+                                <p class="text-warning">Date of appointment: {{ history.created|date }}</p>
+                                <p>Disease: {{ history.disease }}</p>
+                                <p>Doctor: {{ history.doctors.name }} {{ history.doctors.lastname }} {{ history.doctors.surname }}</p>
+                                <p>Therapy: {{ history.therapy }}<</p>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+{% endblock DocContent %}
+

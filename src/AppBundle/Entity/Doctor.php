@@ -30,9 +30,8 @@ class Doctor
     private $appointments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="PacientHistory", inversedBy="doctors")
-     * @ORM\JoinTable(name="doctor_pacienthistory")
-    */
+     * @ORM\OneToMany(targetEntity="PacientHistory", mappedBy="doctors")
+     **/
     private $pacients;
 
     /**
@@ -128,6 +127,19 @@ class Doctor
      * @ORM\OneToOne(targetEntity="user")
      */
     private $user;
+
+    public function __toString()
+    {
+        return $this->getName().' '.$this->getLastname().' '.$this->getSurname();
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pacients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -416,36 +428,6 @@ class Doctor
     }
 
     /**
-     * Set user
-     *
-     * @param \AppBundle\Entity\user $user
-     * @return Doctor
-     */
-    public function setUser(\AppBundle\Entity\user $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \AppBundle\Entity\user 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->pacients = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Set appointments
      *
      * @param \AppBundle\Entity\Appointment $appointments
@@ -499,5 +481,28 @@ class Doctor
     public function getPacients()
     {
         return $this->pacients;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\user $user
+     * @return Doctor
+     */
+    public function setUser(\AppBundle\Entity\user $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\user 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
