@@ -147,7 +147,7 @@ class Appointment
     {
         $this->time[] = $time;
 
-        $time->setAppoigitntment($this);
+        $time->setAppointment($this);
 
         return $this;
     }

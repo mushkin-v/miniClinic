@@ -6,20 +6,22 @@
         <ol>
             {% for appointment in appointments %}
                 {% if appointment.doctor == doctor %}
-                <li>
-                    <p class="text-primary">Appointment date: {{ appointment.date|date }}</p>
-                    <p>Doctor: {{ appointment.doctor }}</p>
-                    <ol>
-                        {% for time in appointment.time %}
-                            <li>
-                                <p class="text-warning">Appointment time:</p>
-                                <p>From: {{ time.fromTime|date }}</p>
-                                <p>To:{{ time.toTime|date }}</p>
-                                {% if time.pacient is not null %}<p>Pacient: {{ time.pacient }}<</p>{% endif %}
-                            </li>
-                        {% endfor %}
-                    </ol>
-                </li>
+                    <li>
+                        <h4 class="text-primary">Appointment date: {{ appointment.date|date("d F Y") }}</h4>
+                        <p class="text-success">Doctor: {{ appointment.doctor }}</p>
+                        <ol>
+                            {% for time in appointment.time %}
+                                <li>
+                                    <p class="text-warning">Appointment time: {{ time.fromTime|date("h:i") }} - {{ time.toTime|date("h:i") }}</p>
+                                    {% if time.pacient is not null %}
+                                        <p class="text-danger">Pacient: {{ time.pacient }}</p>
+                                    {% else %}
+                                        <p class="text-danger">Pacient: No pacient</p>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </li>
                 {% endif %}
             {% endfor %}
         </ol>

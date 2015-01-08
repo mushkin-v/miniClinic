@@ -18,6 +18,21 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/Appointments/{infoline}", name="Appointments", defaults={"infoline" = null})
+     * @param $infoline
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function AppointmentsAction($infoline)
+    {
+        return $this->render(
+            'default/Appointments.html.twig',
+            array(
+                'appointments' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Appointment')->findAll(),
+                'infoline'=>$infoline,
+            ));
+    }
+
+    /**
      * @Route("/personal", name="personal")
      */
     public function personalAction()

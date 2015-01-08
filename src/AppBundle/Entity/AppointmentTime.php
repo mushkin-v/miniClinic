@@ -40,7 +40,7 @@ class AppointmentTime
     private $toTime;
 
     /**
-     * @ORM\OneToOne(targetEntity="Pacient", mappedBy="appointmentTime")
+     * @ORM\ManyToOne(targetEntity="Pacient", inversedBy="appointmentTime")
      **/
     private $pacient;
 
@@ -55,6 +55,8 @@ class AppointmentTime
      */
     private $deletedAt;
     
+
+
 
     /**
      * Get id
