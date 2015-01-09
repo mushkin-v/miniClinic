@@ -8,7 +8,7 @@
                 <li>
                     <p class="text-primary">{{ 'doc.app.pac'|trans({},"messages") }} {{ pacient }}</p>
                     <p>{{ 'doc.app.cn'|trans({},"messages") }} {{ pacient.cardNumber }}, {{ 'doc.app.age'|trans({},"messages") }} {{ pacient.age }}</p>
-                    <p>{{ 'doc.app.age'|trans({},"messages") }} {{ pacient.adress }}, {{ 'doc.app.phone'|trans({},"messages") }} {{ pacient.phone }}</p>
+                    <p>{{ 'doc.app.adress'|trans({},"messages") }} {{ pacient.adress }}, {{ 'doc.app.phone'|trans({},"messages") }} {{ pacient.phone }}</p>
                     <ol>
                         {% for history in pacient.history %}
                             <li>

@@ -75,7 +75,7 @@ class DocController extends Controller
             $appointment->setDoctor($doctor);
             $this->getDoctrine()->getManager()->persist($appointment);
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('docOffice',['infoline'=>'New appointment was created!']));
+            return $this->redirect($this->generateUrl('docOffice',['infoline'=>$this->get('translator')->trans('cotroller.new.app')]));
         }
 
         return $this->render('User/DocOffice/createNewAppointment.html.twig',
@@ -105,7 +105,7 @@ class DocController extends Controller
             'docPacients' => array_unique($pacients),
             )):
             $this->redirect($this->generateUrl(
-                'docOffice',['infoline'=>'You have no pacients!']))
+                'docOffice',['infoline'=>$this->get('translator')->trans('cotroller.no.pac')]))
             ;
     }
 
@@ -142,7 +142,7 @@ class DocController extends Controller
             $history->setDoctors($doctor);
             $this->getDoctrine()->getManager()->persist($history);
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('docOffice',['infoline'=>'Pacient history was created!']));
+            return $this->redirect($this->generateUrl('docOffice',['infoline'=>$this->get('translator')->trans('cotroller.new.pac')]));
         }
 
         return $this->render('User/DocOffice/createPacientHistory.html.twig',

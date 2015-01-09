@@ -32,7 +32,7 @@ class ServicesController extends Controller
                 $message
             );
         }
-        return $this->redirect($this->generateUrl('contact',['infoline'=>'Your message have been send! Thank you!']));
+        return $this->redirect($this->generateUrl('contact',['infoline'=>$this->get('translator')->trans('email.send')]));
     }
 
 
@@ -42,7 +42,7 @@ class ServicesController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function recordPacientToDocAction(Request $request)
-    {   $infoline = 'Sorry, you cant record!';
+    {   $infoline = $this->get('translator')->trans('rec.no');
         if ($request->isMethod('POST')) {
             $docTime = $request->request->get('time');
 
@@ -59,7 +59,7 @@ class ServicesController extends Controller
             $fromTime = $time->getFromTime()->format('H:i');
             $toTime =  $time->getToTime()->format('H:i');
 
-            $infoline = 'Your are recorded to time from '.$fromTime.' to '.$toTime.'! Thank you '.$user->getName().' '.$user->getLastName().'!';
+            $infoline = $this->get('translator')->trans('rec1').' '.$fromTime.' '.$this->get('translator')->trans('rec2').' '.$toTime.'! '.$this->get('translator')->trans('rec3').' '.$user->getName().' '.$user->getLastName().'!';
         }
         return $this->redirect($this->generateUrl('Appointments',['infoline'=>$infoline]));
     }
@@ -70,10 +70,11 @@ class ServicesController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function unRecordPacientToDocAction(Request $request)
-    {   $infoline = 'Sorry, you cant unrecord!';
+    {
+        $infoline = $this->get('translator')->trans('unrec.no', array(), 'messages');
+
         if ($request->isMethod('POST')) {
             $docTime = $request->request->get('time');
-
             $user = $this->getUser()->getIsDoctor()?
                 $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')->findOneByuser($this->getUser()):
                 $this->getDoctrine()->getManager()->getRepository('AppBundle:Pacient')->findOneByuser($this->getUser());
@@ -84,7 +85,7 @@ class ServicesController extends Controller
             $this->getDoctrine()->getManager()->persist($time);
             $this->getDoctrine()->getManager()->flush();
 
-            $infoline = 'Your are unrecorded! Thank you '.$user->getName().' '.$user->getLastName().'!';
+            $infoline = $this->get('translator')->trans('unrec', array(), 'messages').' '.$user->getName().' '.$user->getLastName().'!';
         }
         return $this->redirect($this->generateUrl('Appointments',['infoline'=>$infoline]));
     }

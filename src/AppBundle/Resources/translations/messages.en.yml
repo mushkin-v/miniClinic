@@ -5,6 +5,7 @@ cr:
   doc.cn: Card Number:
 
 error: ERROR
+
 adminPanel:
   cr.pac: Create new pacient or new doctor
   admin: Admin
@@ -107,7 +108,18 @@ doc:
   app.cr.pac.hist: Creating new pacient History, please fill in your details:
   app.choose.pac: Choose your pacient:
   app.disease.inf: Disease information:
-  app.therapy.inf: information:
+  app.therapy.inf: Therapy information:
   app.your.hist: Your appointments history:
   app.your.pac: Your pacients histories:
   app.pac.date: Date of appointment:
+
+cotroller.new.app: New appointment was created!
+cotroller.no.pac: You have no pacients!
+cotroller.new.pac: Pacient history was created!
+email.send: Your message have been send! Thank you!
+rec.no: Sorry, you cant be record!
+rec1: Your are recorded to time from
+rec2: to
+rec3: Thank you
+unrec.no: Sorry, you cant be unrecord!
+unrec: Your are unrecorded! Thank you

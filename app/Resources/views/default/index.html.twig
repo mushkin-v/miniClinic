@@ -148,7 +148,7 @@
 
                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
-                  <h4 class="text-center"><strong>Hello!<br></strong>{{ 'index.glad'|trans({},"messages") }}</h4>
+                  <h4 class="text-center"><strong>{{ 'account.welcome'|trans({},"messages") }}!<br></strong>{{ 'index.glad'|trans({},"messages") }}</h4>
                   <b>{{ 'index.num'|trans({},"messages") }}{{ app.user.getCardNumber }}</b><br><br>
                   <img class="login-img img-rounded" src="{{  asset('bundles/app/images/clinic6.jpg') }}" alt="">
 
