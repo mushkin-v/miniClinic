@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -42,7 +41,7 @@ class User extends BaseUser
      *      maxMessage = "Your card number must be maximum {{ limit }} "
      * )
      */
-    private $card_number=0;
+    private $card_number = 0;
 
     public function __construct()
     {
@@ -53,7 +52,7 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +62,7 @@ class User extends BaseUser
     /**
      * Set card_number
      *
-     * @param integer $cardNumber
+     * @param  integer $cardNumber
      * @return User
      */
     public function setCardNumber($cardNumber)
@@ -76,7 +75,7 @@ class User extends BaseUser
     /**
      * Get card_number
      *
-     * @return integer 
+     * @return integer
      */
     public function getCardNumber()
     {
@@ -86,7 +85,7 @@ class User extends BaseUser
     /**
      * Set isDoctor
      *
-     * @param boolean $isDoctor
+     * @param  boolean $isDoctor
      * @return User
      */
     public function setIsDoctor($isDoctor)
@@ -99,7 +98,7 @@ class User extends BaseUser
     /**
      * Get isDoctor
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsDoctor()
     {

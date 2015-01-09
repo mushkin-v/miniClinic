@@ -145,7 +145,7 @@ class Doctor
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -155,7 +155,7 @@ class Doctor
     /**
      * Set card_number
      *
-     * @param string $cardNumber
+     * @param  string $cardNumber
      * @return Doctor
      */
     public function setCardNumber($cardNumber)
@@ -168,7 +168,7 @@ class Doctor
     /**
      * Get card_number
      *
-     * @return string 
+     * @return string
      */
     public function getCardNumber()
     {
@@ -178,7 +178,7 @@ class Doctor
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Doctor
      */
     public function setName($name)
@@ -191,7 +191,7 @@ class Doctor
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -201,7 +201,7 @@ class Doctor
     /**
      * Set lastname
      *
-     * @param string $lastname
+     * @param  string $lastname
      * @return Doctor
      */
     public function setLastname($lastname)
@@ -214,7 +214,7 @@ class Doctor
     /**
      * Get lastname
      *
-     * @return string 
+     * @return string
      */
     public function getLastname()
     {
@@ -224,7 +224,7 @@ class Doctor
     /**
      * Set surname
      *
-     * @param string $surname
+     * @param  string $surname
      * @return Doctor
      */
     public function setSurname($surname)
@@ -237,7 +237,7 @@ class Doctor
     /**
      * Get surname
      *
-     * @return string 
+     * @return string
      */
     public function getSurname()
     {
@@ -247,7 +247,7 @@ class Doctor
     /**
      * Set age
      *
-     * @param integer $age
+     * @param  integer $age
      * @return Doctor
      */
     public function setAge($age)
@@ -260,7 +260,7 @@ class Doctor
     /**
      * Get age
      *
-     * @return integer 
+     * @return integer
      */
     public function getAge()
     {
@@ -270,7 +270,7 @@ class Doctor
     /**
      * Set adress
      *
-     * @param string $adress
+     * @param  string $adress
      * @return Doctor
      */
     public function setAdress($adress)
@@ -283,7 +283,7 @@ class Doctor
     /**
      * Get adress
      *
-     * @return string 
+     * @return string
      */
     public function getAdress()
     {
@@ -293,7 +293,7 @@ class Doctor
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param  string $phone
      * @return Doctor
      */
     public function setPhone($phone)
@@ -306,7 +306,7 @@ class Doctor
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -316,7 +316,7 @@ class Doctor
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string $email
      * @return Doctor
      */
     public function setEmail($email)
@@ -329,7 +329,7 @@ class Doctor
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -339,7 +339,7 @@ class Doctor
     /**
      * Set job_title
      *
-     * @param string $jobTitle
+     * @param  string $jobTitle
      * @return Doctor
      */
     public function setJobTitle($jobTitle)
@@ -352,7 +352,7 @@ class Doctor
     /**
      * Get job_title
      *
-     * @return string 
+     * @return string
      */
     public function getJobTitle()
     {
@@ -362,7 +362,7 @@ class Doctor
     /**
      * Set other_info
      *
-     * @param string $otherInfo
+     * @param  string $otherInfo
      * @return Doctor
      */
     public function setOtherInfo($otherInfo)
@@ -375,7 +375,7 @@ class Doctor
     /**
      * Get other_info
      *
-     * @return string 
+     * @return string
      */
     public function getOtherInfo()
     {
@@ -385,7 +385,7 @@ class Doctor
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Doctor
      */
     public function setCreated($created)
@@ -398,7 +398,7 @@ class Doctor
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -408,7 +408,7 @@ class Doctor
     /**
      * Set deletedAt
      *
-     * @param \DateTime $deletedAt
+     * @param  \DateTime $deletedAt
      * @return Doctor
      */
     public function setDeletedAt($deletedAt)
@@ -421,7 +421,7 @@ class Doctor
     /**
      * Get deletedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedAt()
     {
@@ -431,7 +431,7 @@ class Doctor
     /**
      * Add appointments
      *
-     * @param \AppBundle\Entity\Appointment $appointments
+     * @param  \AppBundle\Entity\Appointment $appointments
      * @return Doctor
      */
     public function addAppointment(\AppBundle\Entity\Appointment $appointments)
@@ -454,7 +454,7 @@ class Doctor
     /**
      * Get appointments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAppointments()
     {
@@ -464,7 +464,7 @@ class Doctor
     /**
      * Add pacients
      *
-     * @param \AppBundle\Entity\PacientHistory $pacients
+     * @param  \AppBundle\Entity\PacientHistory $pacients
      * @return Doctor
      */
     public function addPacient(\AppBundle\Entity\PacientHistory $pacients)
@@ -487,7 +487,7 @@ class Doctor
     /**
      * Get pacients
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPacients()
     {
@@ -497,7 +497,7 @@ class Doctor
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\user $user
+     * @param  \AppBundle\Entity\user $user
      * @return Doctor
      */
     public function setUser(\AppBundle\Entity\user $user = null)
@@ -510,7 +510,7 @@ class Doctor
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\user 
+     * @return \AppBundle\Entity\user
      */
     public function getUser()
     {

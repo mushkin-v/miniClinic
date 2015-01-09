@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * PacientHistory
@@ -59,11 +58,10 @@ class PacientHistory
      */
     private $deletedAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +71,7 @@ class PacientHistory
     /**
      * Set disease
      *
-     * @param string $disease
+     * @param  string         $disease
      * @return PacientHistory
      */
     public function setDisease($disease)
@@ -86,7 +84,7 @@ class PacientHistory
     /**
      * Get disease
      *
-     * @return string 
+     * @return string
      */
     public function getDisease()
     {
@@ -96,7 +94,7 @@ class PacientHistory
     /**
      * Set therapy
      *
-     * @param string $therapy
+     * @param  string         $therapy
      * @return PacientHistory
      */
     public function setTherapy($therapy)
@@ -109,7 +107,7 @@ class PacientHistory
     /**
      * Get therapy
      *
-     * @return string 
+     * @return string
      */
     public function getTherapy()
     {
@@ -119,7 +117,7 @@ class PacientHistory
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime      $created
      * @return PacientHistory
      */
     public function setCreated($created)
@@ -132,7 +130,7 @@ class PacientHistory
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -142,7 +140,7 @@ class PacientHistory
     /**
      * Set deletedAt
      *
-     * @param \DateTime $deletedAt
+     * @param  \DateTime      $deletedAt
      * @return PacientHistory
      */
     public function setDeletedAt($deletedAt)
@@ -155,7 +153,7 @@ class PacientHistory
     /**
      * Get deletedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedAt()
     {
@@ -165,7 +163,7 @@ class PacientHistory
     /**
      * Set pacient
      *
-     * @param \AppBundle\Entity\Pacient $pacient
+     * @param  \AppBundle\Entity\Pacient $pacient
      * @return PacientHistory
      */
     public function setPacient(\AppBundle\Entity\Pacient $pacient = null)
@@ -178,7 +176,7 @@ class PacientHistory
     /**
      * Get pacient
      *
-     * @return \AppBundle\Entity\Pacient 
+     * @return \AppBundle\Entity\Pacient
      */
     public function getPacient()
     {
@@ -188,7 +186,7 @@ class PacientHistory
     /**
      * Set doctors
      *
-     * @param \AppBundle\Entity\Doctor $doctors
+     * @param  \AppBundle\Entity\Doctor $doctors
      * @return PacientHistory
      */
     public function setDoctors(\AppBundle\Entity\Doctor $doctors = null)
@@ -201,7 +199,7 @@ class PacientHistory
     /**
      * Get doctors
      *
-     * @return \AppBundle\Entity\Doctor 
+     * @return \AppBundle\Entity\Doctor
      */
     public function getDoctors()
     {

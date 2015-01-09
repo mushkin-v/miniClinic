@@ -12,7 +12,7 @@ class PacientController extends Controller
 {
     /**
      * @Route("/pacientRegister", name="pacientRegister")
-     * @param Request $request
+     * @param  Request                                                                                       $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function pacientRegisterAction(Request $request)
@@ -27,6 +27,7 @@ class PacientController extends Controller
             $pacient->setUser($this->getUser());
             $this->getDoctrine()->getManager()->persist($pacient);
             $this->getDoctrine()->getManager()->flush();
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -38,7 +39,7 @@ class PacientController extends Controller
 
     /**
      * @Route("/pacientAccount", name="pacientAccount")
-     * @param Request $request
+     * @param  Request                                                                                       $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function pacientAccountAction(Request $request)
@@ -53,6 +54,7 @@ class PacientController extends Controller
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($pacient);
             $this->getDoctrine()->getManager()->flush();
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 

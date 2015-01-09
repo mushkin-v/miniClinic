@@ -26,7 +26,7 @@ class Pacient
 
     /**
      * @ORM\OneToMany(targetEntity="AppointmentTime", mappedBy="pacient")
-    **/
+     **/
     private $appointmentTime;
 
     /**
@@ -114,7 +114,6 @@ class Pacient
      */
     private $user;
 
-
     public function __toString()
     {
         return $this->getName().' '.$this->getLastname().' '.$this->getSurname();
@@ -132,7 +131,7 @@ class Pacient
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -142,7 +141,7 @@ class Pacient
     /**
      * Set card_number
      *
-     * @param string $cardNumber
+     * @param  string  $cardNumber
      * @return Pacient
      */
     public function setCardNumber($cardNumber)
@@ -155,7 +154,7 @@ class Pacient
     /**
      * Get card_number
      *
-     * @return string 
+     * @return string
      */
     public function getCardNumber()
     {
@@ -165,7 +164,7 @@ class Pacient
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string  $name
      * @return Pacient
      */
     public function setName($name)
@@ -178,7 +177,7 @@ class Pacient
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -188,7 +187,7 @@ class Pacient
     /**
      * Set lastname
      *
-     * @param string $lastname
+     * @param  string  $lastname
      * @return Pacient
      */
     public function setLastname($lastname)
@@ -201,7 +200,7 @@ class Pacient
     /**
      * Get lastname
      *
-     * @return string 
+     * @return string
      */
     public function getLastname()
     {
@@ -211,7 +210,7 @@ class Pacient
     /**
      * Set surname
      *
-     * @param string $surname
+     * @param  string  $surname
      * @return Pacient
      */
     public function setSurname($surname)
@@ -224,7 +223,7 @@ class Pacient
     /**
      * Get surname
      *
-     * @return string 
+     * @return string
      */
     public function getSurname()
     {
@@ -234,7 +233,7 @@ class Pacient
     /**
      * Set age
      *
-     * @param integer $age
+     * @param  integer $age
      * @return Pacient
      */
     public function setAge($age)
@@ -247,7 +246,7 @@ class Pacient
     /**
      * Get age
      *
-     * @return integer 
+     * @return integer
      */
     public function getAge()
     {
@@ -257,7 +256,7 @@ class Pacient
     /**
      * Set adress
      *
-     * @param string $adress
+     * @param  string  $adress
      * @return Pacient
      */
     public function setAdress($adress)
@@ -270,7 +269,7 @@ class Pacient
     /**
      * Get adress
      *
-     * @return string 
+     * @return string
      */
     public function getAdress()
     {
@@ -280,7 +279,7 @@ class Pacient
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param  string  $phone
      * @return Pacient
      */
     public function setPhone($phone)
@@ -293,7 +292,7 @@ class Pacient
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -303,7 +302,7 @@ class Pacient
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string  $email
      * @return Pacient
      */
     public function setEmail($email)
@@ -316,7 +315,7 @@ class Pacient
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -326,7 +325,7 @@ class Pacient
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Pacient
      */
     public function setCreated($created)
@@ -339,7 +338,7 @@ class Pacient
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -349,7 +348,7 @@ class Pacient
     /**
      * Set deletedAt
      *
-     * @param \DateTime $deletedAt
+     * @param  \DateTime $deletedAt
      * @return Pacient
      */
     public function setDeletedAt($deletedAt)
@@ -362,7 +361,7 @@ class Pacient
     /**
      * Get deletedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedAt()
     {
@@ -372,7 +371,7 @@ class Pacient
     /**
      * Add appointmentTime
      *
-     * @param \AppBundle\Entity\AppointmentTime $appointmentTime
+     * @param  \AppBundle\Entity\AppointmentTime $appointmentTime
      * @return Pacient
      */
     public function addAppointmentTime(\AppBundle\Entity\AppointmentTime $appointmentTime)
@@ -395,7 +394,7 @@ class Pacient
     /**
      * Get appointmentTime
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAppointmentTime()
     {
@@ -405,7 +404,7 @@ class Pacient
     /**
      * Add history
      *
-     * @param \AppBundle\Entity\PacientHistory $history
+     * @param  \AppBundle\Entity\PacientHistory $history
      * @return Pacient
      */
     public function addHistory(\AppBundle\Entity\PacientHistory $history)
@@ -428,7 +427,7 @@ class Pacient
     /**
      * Get history
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getHistory()
     {
@@ -438,7 +437,7 @@ class Pacient
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param  \AppBundle\Entity\User $user
      * @return Pacient
      */
     public function setUser(\AppBundle\Entity\User $user = null)
@@ -451,7 +450,7 @@ class Pacient
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getUser()
     {

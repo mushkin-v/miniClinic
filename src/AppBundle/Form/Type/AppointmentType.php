@@ -11,7 +11,7 @@ class AppointmentType extends AbstractType
     {
         $builder
             ->add('date', 'date')
-            ->add('time','collection', array(
+            ->add('time', 'collection', array(
                 'type' => new AppointmentTimeType(),
                 'allow_add'    => true,
                 'prototype' => true,

@@ -23,7 +23,7 @@ class DocController extends Controller
      */
     public function docOfficeAction($infoline)
     {
-        return $this->render('User/docOffice.html.twig',array('infoline'=>$infoline));
+        return $this->render('User/docOffice.html.twig', array('infoline' => $infoline));
     }
 
     /**
@@ -49,7 +49,7 @@ class DocController extends Controller
         return $this->render(
             'User/DocOffice/docAppointmentsHistory.html.twig',
             array(
-                'doctor' =>$this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')
+                'doctor' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')
                     ->findOneByuser($this->getUser()),
                 'appointments' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Appointment')
                     ->findAll(),
@@ -58,7 +58,7 @@ class DocController extends Controller
 
     /**
      * @Route("/createNewAppointment", name="createNewAppointment")
-     * @param Request $request
+     * @param  Request                                                                                       $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createNewAppointmentAction(Request $request)
@@ -75,7 +75,8 @@ class DocController extends Controller
             $appointment->setDoctor($doctor);
             $this->getDoctrine()->getManager()->persist($appointment);
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('docOffice',['infoline'=>$this->get('translator')->trans('cotroller.new.app')]));
+
+            return $this->redirect($this->generateUrl('docOffice', ['infoline' => $this->get('translator')->trans('cotroller.new.app')]));
         }
 
         return $this->render('User/DocOffice/createNewAppointment.html.twig',
@@ -94,18 +95,18 @@ class DocController extends Controller
     {
         $docPacientsHistories = $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')
             ->findOneByuser($this->getUser())->getPacients();
-        foreach($docPacientsHistories as $history){
+        foreach ($docPacientsHistories as $history) {
             $pacients[] = $history->getPacient();
         }
 
-        return isset($pacients)?
+        return isset($pacients) ?
             $this->render(
             'User/DocOffice/docPacientHistory.html.twig',
             array(
             'docPacients' => array_unique($pacients),
-            )):
+            )) :
             $this->redirect($this->generateUrl(
-                'docOffice',['infoline'=>$this->get('translator')->trans('cotroller.no.pac')]))
+                'docOffice', ['infoline' => $this->get('translator')->trans('cotroller.no.pac')]))
             ;
     }
 
@@ -125,7 +126,7 @@ class DocController extends Controller
 
     /**
      * @Route("/createPacientHistory", name="createPacientHistory")
-     * @param Request $request
+     * @param  Request                                                                                       $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createPacientHistoryAction(Request $request)
@@ -142,7 +143,8 @@ class DocController extends Controller
             $history->setDoctors($doctor);
             $this->getDoctrine()->getManager()->persist($history);
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('docOffice',['infoline'=>$this->get('translator')->trans('cotroller.new.pac')]));
+
+            return $this->redirect($this->generateUrl('docOffice', ['infoline' => $this->get('translator')->trans('cotroller.new.pac')]));
         }
 
         return $this->render('User/DocOffice/createPacientHistory.html.twig',
@@ -153,7 +155,7 @@ class DocController extends Controller
 
     /**
      * @Route("/docAccount", name="docAccount")
-     * @param Request $request
+     * @param  Request                                                                                       $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function docAccountAction(Request $request)
@@ -168,6 +170,7 @@ class DocController extends Controller
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($doctor);
             $this->getDoctrine()->getManager()->flush();
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -180,7 +183,7 @@ class DocController extends Controller
     /**
      * @Route("/docRegister/{slug}", name="docRegister")
      * @param $slug
-     * @param Request $request
+     * @param  Request                                                                                       $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function docRegisterAction($slug, Request $request)
@@ -199,6 +202,7 @@ class DocController extends Controller
             $doctor->setUser($doctorLogin);
             $this->getDoctrine()->getManager()->persist($doctor);
             $this->getDoctrine()->getManager()->flush();
+
             return $this->redirect($this->generateUrl('personal'));
         }
 

@@ -10,8 +10,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
-* Listener responsible to change the redirection at the end of the password resetting
-*/
+ * Listener responsible to change the redirection at the end of the password resetting
+ */
 class RegistrationListener implements EventSubscriberInterface
 {
     private $router;
@@ -24,8 +24,8 @@ class RegistrationListener implements EventSubscriberInterface
     }
 
     /**
-    * {@inheritDoc}
-    */
+     * {@inheritDoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
@@ -36,7 +36,7 @@ class RegistrationListener implements EventSubscriberInterface
     public function onRegistrationCompleted(FormEvent $event)
     {
         $request = $this->requestStack->getCurrentRequest()->request->get('fos_user_registration_form');
-        $url = isset($request['isDoctor'])? $this->router->generate('docRegister',array('slug'=>$request['username'])): $this->router->generate('pacientRegister');
+        $url = isset($request['isDoctor']) ? $this->router->generate('docRegister', array('slug' => $request['username'])) : $this->router->generate('pacientRegister');
 
         $event->setResponse(new RedirectResponse($url));
     }

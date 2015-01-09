@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Appointment
@@ -49,7 +48,7 @@ class Appointment
      * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
      */
     private $deletedAt;
-    
+
     /**
      * Constructor
      */
@@ -62,7 +61,7 @@ class Appointment
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -72,7 +71,7 @@ class Appointment
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param  \DateTime   $date
      * @return Appointment
      */
     public function setDate($date)
@@ -85,7 +84,7 @@ class Appointment
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -95,7 +94,7 @@ class Appointment
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime   $created
      * @return Appointment
      */
     public function setCreated($created)
@@ -108,7 +107,7 @@ class Appointment
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -118,7 +117,7 @@ class Appointment
     /**
      * Set deletedAt
      *
-     * @param \DateTime $deletedAt
+     * @param  \DateTime   $deletedAt
      * @return Appointment
      */
     public function setDeletedAt($deletedAt)
@@ -131,7 +130,7 @@ class Appointment
     /**
      * Get deletedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedAt()
     {
@@ -141,7 +140,7 @@ class Appointment
     /**
      * Add time
      *
-     * @param \AppBundle\Entity\AppointmentTime $time
+     * @param  \AppBundle\Entity\AppointmentTime $time
      * @return Appointment
      */
     public function addTime(\AppBundle\Entity\AppointmentTime $time)
@@ -166,7 +165,7 @@ class Appointment
     /**
      * Get time
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTime()
     {
@@ -176,7 +175,7 @@ class Appointment
     /**
      * Set doctor
      *
-     * @param \AppBundle\Entity\Doctor $doctor
+     * @param  \AppBundle\Entity\Doctor $doctor
      * @return Appointment
      */
     public function setDoctor(\AppBundle\Entity\Doctor $doctor = null)
@@ -189,7 +188,7 @@ class Appointment
     /**
      * Get doctor
      *
-     * @return \AppBundle\Entity\Doctor 
+     * @return \AppBundle\Entity\Doctor
      */
     public function getDoctor()
     {

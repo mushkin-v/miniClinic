@@ -16,7 +16,8 @@ class DefaultController extends Controller
     public function setLocaleAction($loc)
     {
         $this->get('request')->setLocale($loc);
-        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
+
+        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc)));
     }
     /**
      * @Route("/{_locale}", name="homepage", defaults={"_locale": "en"}, requirements={"_locale": "en|uk"})
@@ -25,8 +26,8 @@ class DefaultController extends Controller
     {
         $locale = $request->getLocale();
 
-        return $this->getUser()==true?
-            $this->render('default/index.html.twig'):
+        return $this->getUser() == true ?
+            $this->render('default/index.html.twig') :
             $this->redirect($this->generateUrl('fos_user_security_login'))
             ;
     }
@@ -41,9 +42,9 @@ class DefaultController extends Controller
         return $this->render(
             'default/Appointments.html.twig',
             array(
-                'pacient' =>$this->getDoctrine()->getManager()->getRepository('AppBundle:Pacient')->findOneByuser($this->getUser()),
+                'pacient' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Pacient')->findOneByuser($this->getUser()),
                 'appointments' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Appointment')->findAll(),
-                'infoline'=>$infoline,
+                'infoline' => $infoline,
             ));
     }
 
@@ -52,7 +53,7 @@ class DefaultController extends Controller
      */
     public function personalAction()
     {
-        return $this->render('default/personal.html.twig',[
+        return $this->render('default/personal.html.twig', [
             'doctors' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')->findAll()
         ]);
     }
@@ -64,7 +65,7 @@ class DefaultController extends Controller
      */
     public function contactAction($infoline)
     {
-        return $this->render('default/contact.html.twig',array('infoline'=>$infoline));
+        return $this->render('default/contact.html.twig', array('infoline' => $infoline));
     }
 
     /**
