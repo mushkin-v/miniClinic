@@ -2,17 +2,17 @@
 
 {% block DocContent %}
     {% if app.user.getIsDoctor == true %}
-        <h3>Creating new appointment day, please fill in your details:</h3><br>
+        <h3>{{ 'doc.app.cr.day'|trans({},"messages") }}</h3><br>
 
         <form action="{{ path('createNewAppointment') }}" {{ form_enctype(form) }} method="POST">
             <div class="form-horizontal col-md-12">
                 <div class="form-group">
                     <div class="col-md-12">{{ form_errors(form.date) }}</div>
-                    <div class="col-md-2 control-label">{{ form_label(form.date, 'Appointment day:') }}</div>
+                    <div class="col-md-2 control-label">{{ form_label(form.date, 'doc.app.date'|trans({},"messages")) }}</div>
                     <div class="col-md-6">{{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}</div>
                 </div>
 
-                <h4>Apointment time:</h4>
+                <h4>{{ 'doc.app.time'|trans({},"messages") }}</h4>
                 <div class="col-md-12">
                 <ul class="time" data-prototype="{{ form_widget(form.time.vars.prototype)|e }}" >
                     {% for time in form.time %}
@@ -57,7 +57,7 @@
             var $collectionHolder;
 
         // setup an "add a tag" link
-            var $addTagLink = $('<a href="#" role="button" class="btn btn-sm btn-success add_tag_link">Add time</a>');
+            var $addTagLink = $('<a href="#" role="button" class="btn btn-sm btn-success add_tag_link">{{ 'doc.app.add.time'|trans({},"messages") }}</a>');
             var $newLinkLi = $('<li class="form-group col-sm-8"></li>').append($addTagLink);
 
         jQuery(document).ready(function() {
@@ -107,7 +107,7 @@
         };
 
             function addTagFormDeleteLink($tagFormLi) {
-                var $removeFormA = $('<a role="button" class="btn btn-sm btn-danger" href="#">delete time</a>');
+                var $removeFormA = $('<a role="button" class="btn btn-sm btn-danger" href="#">{{ 'doc.app.del.time'|trans({},"messages") }}</a>');
                 $tagFormLi.append($removeFormA);
 
                 $removeFormA.on('click', function(e) {

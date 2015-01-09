@@ -9,7 +9,7 @@
     <meta name="description" content="Mushkin miniClinic">
     <meta name="author" content="Mushkin">
 
-    <title>{% block title %}Welcome to miniClinic{% endblock %}</title>
+    <title>{% block title %}{{ 'base.welcome'|trans({},"messages") }}{% endblock %}</title>
 
     {% block stylesheets %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">

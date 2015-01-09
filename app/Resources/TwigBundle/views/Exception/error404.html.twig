@@ -2,15 +2,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>It seems something went wrong.. We are awfully sorry: {{ status_text }}</title>
+    <title>{{ 'error'|trans({},"messages") }}: {{ status_text }}</title>
 </head>
 <body>
-<h1>Oops! An Error Occurred... :((((</h1>
-
-<h2>"{{ status_code }} {{ status_text }}".</h2>
-
-<div>
-    <img src="{{ asset('images/404.jpg') }}">
-</div>
+<h2>"{{ 'error'|trans({},"messages") }}: {{ status_code }} {{ status_text }}".</h2>
 </body>
 </html>

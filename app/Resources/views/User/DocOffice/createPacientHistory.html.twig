@@ -2,25 +2,25 @@
 
 {% block DocContent %}
     {% if app.user.getIsDoctor == true %}
-        <h3>Creating new pacient History, please fill in your details:</h3><br>
+        <h3>{{ 'doc.app.cr.pac.hist'|trans({},"messages") }}</h3><br>
 
         <form action="{{ path('createPacientHistory') }}" {{ form_enctype(form) }} method="POST">
             <div class="form-horizontal col-md-12">
                 <div class="form-group">
                     <div class="col-sm-12">{{ form_errors(form.pacient) }}</div>
-                    <div class="col-sm-2 control-label">{{ form_label(form.pacient, 'Choose your pacient:') }}</div>
+                    <div class="col-sm-2 control-label">{{ form_label(form.pacient, 'doc.app.choose.pac'|trans({},"messages")) }}</div>
                     <div class="col-sm-6">{{ form_widget(form.pacient, {'attr': {'class': 'form-control'}}) }}</div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-12">{{ form_errors(form.disease) }}</div>
-                    <div class="col-sm-2 control-label">{{ form_label(form.disease, 'Disease information:') }}</div>
+                    <div class="col-sm-2 control-label">{{ form_label(form.disease, 'doc.app.disease.inf'|trans({},"messages")) }}</div>
                     <div class="col-sm-6">{{ form_widget(form.disease, {'attr': {'class': 'form-control', 'style':'height: 200px'}}) }}</div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-12">{{ form_errors(form.therapy) }}</div>
-                    <div class="col-sm-2 control-label">{{ form_label(form.therapy, 'Therapy information:') }}</div>
+                    <div class="col-sm-2 control-label">{{ form_label(form.therapy, 'doc.app.therapy.inf'|trans({},"messages")) }}</div>
                     <div class="col-sm-6">{{ form_widget(form.therapy, {'attr': {'class': 'form-control', 'style':'height: 200px'}}) }}</div>
                 </div>
 
