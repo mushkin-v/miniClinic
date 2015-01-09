@@ -1,0 +1,32 @@
+{% extends ":default:index.html.twig" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ 'personal.our'|trans({},"messages") }}
+                <small>{{ 'personal.nice'|trans({},"messages") }}</small>
+            </h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
+        </div>
+    </div>
+
+    <!-- Team Members Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">{{ 'personal.team'|trans({},"messages") }}</h2>
+        </div>
+        {% for doctor in doctors %}
+            {% if loop.first %} {% else %}
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-personal img-circle img-center" src="{{  asset('bundles/app/images/doctors/doctor%this%.jpg'|replace({'%this%': loop.index })) }}" alt="">
+                <h3>{{ doctor.name }} {{ doctor.lastname }} </br> {{ doctor.surname }} </br>
+                    <small>{{ doctor.jobTitle }}</small>
+                </h3>
+                <p>{{ doctor.otherInfo }}</p>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock content %}

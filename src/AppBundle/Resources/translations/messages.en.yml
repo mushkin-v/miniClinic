@@ -1,0 +1,125 @@
+cr:
+  doc: Create a doctor?
+  doc.email: Email:
+  doc.username: Username:
+  doc.cn: Card Number:
+
+error: ERROR
+
+adminPanel:
+  cr.pac: Create new pacient or new doctor
+  admin: Admin
+  panel: Panel
+
+Appointment:
+  date: Appointment date:
+  Doctor: Doctor:
+  time: Appointment time:
+  Pacient: Pacient:
+  unrec: Unrecord yourself
+  someonerec: Some one has already recorded
+  rec: Record yourself to this time
+
+contact:
+  our: Contact our
+  Clinic: Clinic
+  Phone: Phone:
+  Adress: Address:
+  Contact: Contact
+  form: form
+  Name: Name
+  email: Email Address
+  PhoneN: Phone Number
+  Message: Message
+  Send: Send
+
+index:
+  Home: Home
+  Personal: Personal
+  Services: Services
+  Contact: Contact
+  doc.office: Doctor's office
+  Appointments: Appointments
+  AdminPanel: Admin panel
+  MyAccount: My Account
+  English: English
+  Ukrainian: Ukrainian
+  welcomeDoc: Welcome Doctor to our clinic!
+  welcomePac: Welcome Pacient to our Clinic!
+  welcome: Welcome to our Clinic!
+  glad: We glad to see you!
+  num: Your card number is №
+  copy: Copyright © miniClinic Website 2015
+
+personal:
+  our: Our personal
+  nice: It's Nice to Meet You!
+  team: Our Team
+
+service:
+  our: Our medicine
+  Services: Services
+
+base.welcome: Welcome to miniClinic
+
+
+account:
+  welPac: Welcome to our clinic, please fill in your details
+  welcome: Welcome
+  name: Enter your name:
+  lastname: Enter your lastname:
+  surname: Enter your surname:
+  age: Enter your age:
+  adress: Enter your adress:
+  phone: Enter your phone:
+  job: Enter your job title:
+  other: Enter your other information:
+  update: Update your information
+
+doc:
+  welcome: Welcome Doctor
+  details: you can update your details
+  office: to your office
+  Doctor: Doctor's
+  Panel: Panel
+  cr.hist: Create new pacient history
+  pac.hist: View your pacients histories
+  all.hist: View all pacients histories
+  cr.app: Create new appointment day
+  app: View your appointments
+  all.app: View all appointments
+  hello: Hello doctor, please fill in your details:
+  app.hist: All appointments history:
+  app.date: Appointment date:
+  app.doc: Doctor:
+  app.time: Appointment time:
+  app.pac: Pacient:
+  app.no.pac: No pacient
+  app.pac.hist: All pacients histories:
+  app.cn: Card number:
+  app.age: age:
+  app.adress: Adress:
+  app.phone: phone:
+  app.Disease: Disease:
+  app.Therapy: Therapy:
+  app.cr.day: Creating new appointment day, please fill in your details:
+  app.add.time: Add time
+  app.del.time: Delete time
+  app.cr.pac.hist: Creating new pacient History, please fill in your details:
+  app.choose.pac: Choose your pacient:
+  app.disease.inf: Disease information:
+  app.therapy.inf: Therapy information:
+  app.your.hist: Your appointments history:
+  app.your.pac: Your pacients histories:
+  app.pac.date: Date of appointment:
+
+cotroller.new.app: New appointment was created!
+cotroller.no.pac: You have no pacients!
+cotroller.new.pac: Pacient history was created!
+email.send: Your message have been send! Thank you!
+rec.no: Sorry, you cant be record!
+rec1: Your are recorded to time from
+rec2: to
+rec3: Thank you
+unrec.no: Sorry, you cant be unrecord!
+unrec: Your are unrecorded! Thank you

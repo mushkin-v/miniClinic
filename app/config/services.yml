@@ -1,9 +1,30 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+    class_vitmail: AppBundle\Services\VitMail
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    vit_user.registration.form.type:
+        class: AppBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: vit_user_registration }
+
+    vit_user.RegistrationListener:
+        class: AppBundle\EventListener\RegistrationListener
+        arguments: [@router, @request_stack]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    vitmail:
+        class:     %class_vitmail%
+        arguments: ["@mailer"]
+
+    acme_locale.locale_listener:
+            class: AppBundle\EventListener\LocaleListener
+            arguments: ["%kernel.default_locale%"]
+            tags:
+                - { name: kernel.event_subscriber }
+
+    vit.Twig.testTwigExt:
+        class: AppBundle\Twig\testTwigExt
+        tags:
+            - { name: twig.extension }

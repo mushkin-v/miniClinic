@@ -1,0 +1,36 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="form-group">
+            {{ form_errors(form.isDoctor) }}
+            {{ form_label(form.isDoctor, 'cr.doc'|trans({},"messages")) }}
+            {{ form_widget(form.isDoctor) }}
+        </div>
+    {% endif %}
+        <div class="form-group">
+            {{ form_errors(form.email) }}
+            {{ form_label(form.email, 'cr.doc.email'|trans({},"messages")) }}
+            {{ form_widget(form.email) }}
+        </div>
+        <div class="form-group">
+            {{ form_errors(form.username) }}
+            {{ form_label(form.username, 'cr.doc.username'|trans({},"messages")) }}
+            {{ form_widget(form.username) }}
+        </div>
+        <div class="form-group">
+            {{ form_errors(form.card_number) }}
+            {{ form_label(form.card_number, 'cr.doc.cn'|trans({},"messages")) }}
+            {{ form_widget(form.card_number) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.plainPassword) }}
+        </div>
+        {{ form_widget(form._token) }}
+
+    <div class="form-group">
+            <input class="blogin btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
+        </div>
+
+
+</form>

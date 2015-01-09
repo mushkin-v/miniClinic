@@ -1,5 +1,173 @@
-{% extends 'base.html.twig' %}
+{% extends "::base.html.twig" %}
 
 {% block body %}
-    Homepage.
-{% endblock %}
+
+   <!-- Navigation -->
+   <nav class="navbar navbar-inverse navbar-med navbar-fixed-top" role="navigation">
+      <div class="container">
+         <!-- Brand and toggle get grouped for better mobile display -->
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+               <img class="img-logo img-circle" src="{{  asset('bundles/app/images/logo.jpg') }}" alt="">
+            </a>
+         </div>
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+
+               <li>
+                  <a href="{{ path('homepage') }}">{{ 'index.Home'|trans({},"messages") }}</a>
+               </li>
+
+               <li>
+                  <a href="{{ path('personal') }}">{{ 'index.Personal'|trans({},"messages") }}</a>
+               </li>
+
+               <li>
+                  <a href="{{ path('services') }}">{{ 'index.Services'|trans({},"messages") }}</a>
+               </li>
+
+               <li>
+                  <a href="{{ path('contact') }}">{{ 'index.Contact'|trans({},"messages") }}</a>
+               </li>
+
+               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  {% if app.user.getIsDoctor == true %}
+                     <!-- Page Doctor Content -->
+                     <li>
+                        <a href="{{ path('docOffice') }}">{{ 'index.doc.office'|trans({},"messages") }}</a>
+                     </li>
+                  {% else %}
+                     <!-- Page Pacient Content -->
+                     <li>
+                        <a href="{{ path('Appointments') }}">{{ 'index.Appointments'|trans({},"messages") }}</a>
+                     </li>
+                  {% endif %}
+
+               {% endif %}
+               {% if is_granted('ROLE_SUPER_ADMIN') %}
+                  <li>
+                     <a href="{{ path('adminPanel') }}">{{ 'index.AdminPanel'|trans({},"messages") }}</a>
+                  </li>
+               {% endif %}
+            </ul>
+
+            <ul class="nav navbar-nav login-menu">
+               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  {% if app.user.getIsDoctor == true %}
+                     <!-- Page Doctor Content -->
+                     <li>
+                        <a href="{{ path('docAccount') }}">{{ 'index.MyAccount'|trans({},"messages") }}</a>
+                     </li>
+                  {% else %}
+                     <!-- Page Pacient Content -->
+                     <li>
+                        <a href="{{ path('pacientAccount') }}">{{ 'index.MyAccount'|trans({},"messages") }}</a>
+                     </li>
+                  {% endif %}
+                  <li>
+                      <a href="#"> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a>
+                  </li>
+                  <li>
+                     <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                  </li>
+               {% else %}
+                  <li>
+                     <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                  </li>
+               {% endif %}
+            </ul>
+
+            </div>
+         </div>
+      <div style="position: absolute; right: 5px; top: 5px;">
+         <ul style="padding: 0; margin: 0;">
+            <li style="float: left; padding: 0px; list-style: none;">
+               <a href="{{ path('setLocale', {'loc': 'en'}) }}">
+                  <img src="{{ asset('bundles/app/images/flag_great_britain.png') }}" alt="{{ 'index.English'|trans({},"messages") }}">
+               </a>
+            </li>
+            <li style="float: left; padding: 0px; list-style: none;">
+               <a href="{{ path('setLocale', {'loc': 'uk'}) }}" >
+                  <img src="{{ asset('bundles/app/images/flag_ukraine.png') }}" alt="{{ 'index.Ukrainian'|trans({},"messages") }}">
+               </a>
+            </li>
+         </ul>
+      </div>
+         <!-- /.navbar-collapse -->
+      </div>
+   </nav>
+
+   <div class="container">
+      <!-- Page Content -->
+   {% block content %}
+      <div class="row">
+         <div class="col-md-10">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+               {% if app.user.getIsDoctor == true %}
+                  <!-- Page Doctor Content -->
+
+                  <h2 class="index-welcome">{{ 'index.welcomeDoc'|trans({},"messages") }}</h2>
+
+               {% else %}
+                  <!-- Page Pacient Content -->
+
+                  <h2 class="index-welcome">{{ 'index.welcomePac'|trans({},"messages") }}</h2>
+
+               {% endif %}
+
+            {% else %}
+               <!-- Page ANONYMOUS Content -->
+
+               <h2 class="index-welcome">{{ 'index.welcome'|trans({},"messages") }}</h2>
+
+            {% endif %}
+            <small class="text-danger">{{ 'This test message is shown with Twig extension help!'|show_help|raw }}</small>
+            <h3>Heir you can read about our History!</h3>
+            <p class="index-text">
+               <img class=" index-text-img-left img-rounded" src="{{  asset('bundles/app/images/clinic.JPG') }}" alt="">
+               &nbsp&nbsp&nbsp&nbsp <b> History (from Greek ἱστορία, historia, meaning "inquiry, knowledge acquired by investigation")</b> is the study of the past, particularly how it relates to humans.[3][4] It is an umbrella term that relates to past events as well as the memory, discovery, collection, organization, presentation, and interpretation of information about these events. Scholars who write about history are called historians. Events occurring prior to written record are considered prehistory.</br></br>
+               <img class="index-text-img-right img-rounded" src="{{  asset('bundles/app/images/clinic1.jpg') }}" alt="">
+               &nbsp&nbsp&nbsp&nbsp History can also refer to the academic discipline which uses a narrative to examine and analyse a sequence of past events, and objectively determine the patterns of cause and effect that determine them.[5][6] Historians sometimes debate the nature of history and its usefulness by discussing the study of the discipline as an end in itself and as a way of providing "perspective" on the problems of the present.</br></br>
+               <img class="index-text-img-left img-rounded" src="{{  asset('bundles/app/images/clinic2.jpg') }}" alt="">
+               &nbsp&nbsp&nbsp&nbsp Stories common to a particular culture, but not supported by external sources (such as the tales surrounding King Arthur) are usually classified as cultural heritage or legends, because they do not support the "disinterested investigation" required of the discipline of history. Herodotus, a 5th-century BC Greek historian is considered within the Western tradition to be the "father of history", and, along with his contemporary Thucydides, helped form the foundations for the modern study of human history. Their work continues to be read today and the divide between the culture-focused Herodotus and the military-focused Thucydides remains a point of contention or approach in modern historical writing. In the Eastern tradition, a state chronicle the Spring and Autumn Annals was known to be compiled from as early as 722 BC although only 2nd century BC texts survived.</br></br>
+               <img class="index-text-img-right img-rounded" src="{{  asset('bundles/app/images/clinic3.jpg') }}" alt="">
+               &nbsp&nbsp&nbsp&nbsp Ancient influences have helped spawn variant interpretations of the nature of history which have evolved over the centuries and continue to change today. The modern study of history is wide-ranging, and includes the study of specific regions and the study of certain topical or thematical elements of historical investigation. Often history is taught as part of primary and secondary education, and the academic study of history is a major discipline in University studies.There are varieties of ways in which history can be organized, including chronologically, culturally, territorially, and thematically. These divisions are not mutually exclusive, and significant overlaps are often present, as in "The International Women's Movement in an Age of Transition, 1830–1975." It is possible for historians to concern themselves with both the very specific and the very general, although the modern trend has been toward specialization. The area called Big History resists this specialization, and searches for universal patterns or trends. History has often been studied with some practical or theoretical aim, but also may be studied out of simple intellectual curiosity.</br></br>
+            </p>
+         </div>
+
+         <!-- Page LOGIN Content -->
+         <div class="col-md-2">
+            {% block logincontent %}
+
+               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                  <h4 class="text-center"><strong>{{ 'account.welcome'|trans({},"messages") }}!<br></strong>{{ 'index.glad'|trans({},"messages") }}</h4>
+                  <b>{{ 'index.num'|trans({},"messages") }}{{ app.user.getCardNumber }}</b><br><br>
+                  <img class="login-img img-rounded" src="{{  asset('bundles/app/images/clinic6.jpg') }}" alt="">
+
+               {% endif %}
+
+            {% endblock logincontent %}
+         </div>
+      </div>
+   {% endblock content %}
+
+      <!-- Footer -->
+      <footer>
+         <hr>
+         <div class="row">
+            <div class="col-md-12">
+               <p class="footer">{{ 'index.copy'|trans({},"messages") }}</p>
+            </div>
+         </div>
+      </footer>      
+   </div>
+{% endblock body%}
