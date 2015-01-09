@@ -1,0 +1,30 @@
+{% extends ":default:index.html.twig" %}
+
+{% block content %}
+{% if app.user.getIsDoctor == true %}
+{% if infoline is defined %}<h2 class="text-center index-welcome">{{ infoline }}</h2><br>{% endif %}
+
+<h3>{{ 'doc.welcome'|trans({},"messages") }} {{ app.user.getUserName }} {{ 'doc.office'|trans({},"messages") }}!</h3>
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12">
+                <hr>
+                <h2 class="intro-text text-center">{{ 'doc.Doctor'|trans({},"messages") }} <strong>{{ 'doc.Panel'|trans({},"messages") }}</strong></h2>
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <a class="btn btn-danger" role="button" href="{{ path('createPacientHistory') }}">{{ 'doc.cr.hist'|trans({},"messages") }}</a>
+                <a class="btn btn-primary" role="button" href="{{ path('docPacientHistory') }}">{{ 'doc.pac.hist'|trans({},"messages") }}</a>
+                <a class="btn btn-success" role="button" href="{{ path('allPacientHistory') }}">{{ 'doc.all.hist'|trans({},"messages") }}</a><br><br>
+                <a class="btn btn-danger" role="button" href="{{ path('createNewAppointment') }}">{{ 'doc.cr.app'|trans({},"messages") }}</a>
+                <a class="btn btn-primary" role="button" href="{{ path('docAppointmentsHistory') }}">{{ 'doc.app'|trans({},"messages") }}</a>
+                <a class="btn btn-success" role="button" href="{{ path('allAppointmentsHistory') }}">{{ 'doc.all.app'|trans({},"messages") }}</a><br>
+            </div>
+        </div>
+    </div>
+    {% block DocContent %}
+    {% endblock DocContent %}
+{% endif %}
+{% endblock content %}
+
+

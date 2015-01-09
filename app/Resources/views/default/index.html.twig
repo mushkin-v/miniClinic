@@ -23,29 +23,38 @@
             <ul class="nav navbar-nav">
 
                <li>
-                  <a href="{{ path('homepage') }}">Home</a>
+                  <a href="{{ path('homepage') }}">{{ 'index.Home'|trans({},"messages") }}</a>
                </li>
 
                <li>
-                  <a href="{{ path('personal') }}">Personal</a>
+                  <a href="{{ path('personal') }}">{{ 'index.Personal'|trans({},"messages") }}</a>
                </li>
 
                <li>
-                  <a href="{{ path('services') }}">Services</a>
+                  <a href="{{ path('services') }}">{{ 'index.Services'|trans({},"messages") }}</a>
                </li>
 
                <li>
-                  <a href="{{ path('contact') }}">Contact</a>
+                  <a href="{{ path('contact') }}">{{ 'index.Contact'|trans({},"messages") }}</a>
                </li>
 
                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                  <li>
-                     <a href="#">Appointments</a>
-                  </li>
+                  {% if app.user.getIsDoctor == true %}
+                     <!-- Page Doctor Content -->
+                     <li>
+                        <a href="{{ path('docOffice') }}">{{ 'index.doc.office'|trans({},"messages") }}</a>
+                     </li>
+                  {% else %}
+                     <!-- Page Pacient Content -->
+                     <li>
+                        <a href="{{ path('Appointments') }}">{{ 'index.Appointments'|trans({},"messages") }}</a>
+                     </li>
+                  {% endif %}
+
                {% endif %}
                {% if is_granted('ROLE_SUPER_ADMIN') %}
                   <li>
-                     <a href="{{ path('adminPanel') }}">Admin panel</a>
+                     <a href="{{ path('adminPanel') }}">{{ 'index.AdminPanel'|trans({},"messages") }}</a>
                   </li>
                {% endif %}
             </ul>
@@ -55,12 +64,12 @@
                   {% if app.user.getIsDoctor == true %}
                      <!-- Page Doctor Content -->
                      <li>
-                        <a href="{{ path('docAccount') }}">My Account</a>
+                        <a href="{{ path('docAccount') }}">{{ 'index.MyAccount'|trans({},"messages") }}</a>
                      </li>
                   {% else %}
                      <!-- Page Pacient Content -->
                      <li>
-                        <a href="{{ path('pacientAccount') }}">My Account</a>
+                        <a href="{{ path('pacientAccount') }}">{{ 'index.MyAccount'|trans({},"messages") }}</a>
                      </li>
                   {% endif %}
                   <li>
@@ -78,6 +87,20 @@
 
             </div>
          </div>
+      <div style="position: absolute; right: 5px; top: 5px;">
+         <ul style="padding: 0; margin: 0;">
+            <li style="float: left; padding: 0px; list-style: none;">
+               <a href="{{ path('setLocale', {'loc': 'en'}) }}">
+                  <img src="{{ asset('bundles/app/images/flag_great_britain.png') }}" alt="{{ 'index.English'|trans({},"messages") }}">
+               </a>
+            </li>
+            <li style="float: left; padding: 0px; list-style: none;">
+               <a href="{{ path('setLocale', {'loc': 'uk'}) }}" >
+                  <img src="{{ asset('bundles/app/images/flag_ukraine.png') }}" alt="{{ 'index.Ukrainian'|trans({},"messages") }}">
+               </a>
+            </li>
+         </ul>
+      </div>
          <!-- /.navbar-collapse -->
       </div>
    </nav>
@@ -91,19 +114,19 @@
                {% if app.user.getIsDoctor == true %}
                   <!-- Page Doctor Content -->
 
-                  <h2 class="index-welcome">Welcome Doctor to our clinic!</h2>
+                  <h2 class="index-welcome">{{ 'index.welcomeDoc'|trans({},"messages") }}</h2>
 
                {% else %}
                   <!-- Page Pacient Content -->
 
-                  <h2 class="index-welcome">Welcome Pacient to our Clinic!</h2>
+                  <h2 class="index-welcome">{{ 'index.welcomePac'|trans({},"messages") }}</h2>
 
                {% endif %}
 
             {% else %}
                <!-- Page ANONYMOUS Content -->
 
-               <h2 class="index-welcome">Welcome to our Clinic!</h2>
+               <h2 class="index-welcome">{{ 'index.welcome'|trans({},"messages") }}</h2>
 
             {% endif %}
             <h3>Heir you can read about our History!</h3>
@@ -125,8 +148,8 @@
 
                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
-                  <h4 class="text-center"><strong>Hello!<br></strong>We glad to see you!</h4>
-                  <b>Your card number is №{{ app.user.getCardNumber }}</b><br><br>
+                  <h4 class="text-center"><strong>{{ 'account.welcome'|trans({},"messages") }}!<br></strong>{{ 'index.glad'|trans({},"messages") }}</h4>
+                  <b>{{ 'index.num'|trans({},"messages") }}{{ app.user.getCardNumber }}</b><br><br>
                   <img class="login-img img-rounded" src="{{  asset('bundles/app/images/clinic6.jpg') }}" alt="">
 
                {% endif %}
@@ -141,7 +164,7 @@
          <hr>
          <div class="row">
             <div class="col-md-12">
-               <p class="footer">Copyright &copy; miniClinic Website 2015</p>
+               <p class="footer">{{ 'index.copy'|trans({},"messages") }}</p>
             </div>
          </div>
       </footer>      

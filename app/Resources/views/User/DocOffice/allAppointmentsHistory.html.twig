@@ -1,0 +1,28 @@
+{% extends ":User:docOffice.html.twig" %}
+
+{% block DocContent %}
+    {% if app.user.getIsDoctor == true %}
+     <h3>{{ 'doc.app.hist'|trans({},"messages") }}</h3><br>
+        <ol>
+            {% for appointment in appointments %}
+                <li>
+                    <h4 class="text-primary">{{ 'doc.app.date'|trans({},"messages") }} {{ appointment.date|date("d F Y") }}</h4>
+                    <p class="text-success">{{ 'doc.app.doc'|trans({},"messages") }} {{ appointment.doctor }}</p>
+                    <ol>
+                        {% for time in appointment.time %}
+                            <li>
+                                <p class="text-warning">{{ 'doc.app.time'|trans({},"messages") }} {{ time.fromTime|date("h:i") }} - {{ time.toTime|date("h:i") }}</p>
+                                {% if time.pacient is not null %}
+                                    <p class="text-danger">{{ 'doc.app.pac'|trans({},"messages") }} {{ time.pacient }}</p>
+                                {% else %}
+                                    <p class="text-danger">{{ 'doc.app.pac'|trans({},"messages") }} {{ 'doc.app.no.pac'|trans({},"messages") }}</p>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+{% endblock DocContent %}
+

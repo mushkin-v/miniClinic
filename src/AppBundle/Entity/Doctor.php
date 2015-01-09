@@ -25,6 +25,16 @@ class Doctor
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="Appointment", mappedBy="doctor")
+     **/
+    private $appointments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PacientHistory", mappedBy="doctors")
+     **/
+    private $pacients;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="card_number", type="string", length=255)
@@ -117,6 +127,20 @@ class Doctor
      * @ORM\OneToOne(targetEntity="user")
      */
     private $user;
+
+    public function __toString()
+    {
+        return $this->getName().' '.$this->getLastname().' '.$this->getSurname();
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->appointments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pacients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -402,6 +426,72 @@ class Doctor
     public function getDeletedAt()
     {
         return $this->deletedAt;
+    }
+
+    /**
+     * Add appointments
+     *
+     * @param \AppBundle\Entity\Appointment $appointments
+     * @return Doctor
+     */
+    public function addAppointment(\AppBundle\Entity\Appointment $appointments)
+    {
+        $this->appointments[] = $appointments;
+
+        return $this;
+    }
+
+    /**
+     * Remove appointments
+     *
+     * @param \AppBundle\Entity\Appointment $appointments
+     */
+    public function removeAppointment(\AppBundle\Entity\Appointment $appointments)
+    {
+        $this->appointments->removeElement($appointments);
+    }
+
+    /**
+     * Get appointments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppointments()
+    {
+        return $this->appointments;
+    }
+
+    /**
+     * Add pacients
+     *
+     * @param \AppBundle\Entity\PacientHistory $pacients
+     * @return Doctor
+     */
+    public function addPacient(\AppBundle\Entity\PacientHistory $pacients)
+    {
+        $this->pacients[] = $pacients;
+
+        return $this;
+    }
+
+    /**
+     * Remove pacients
+     *
+     * @param \AppBundle\Entity\PacientHistory $pacients
+     */
+    public function removePacient(\AppBundle\Entity\PacientHistory $pacients)
+    {
+        $this->pacients->removeElement($pacients);
+    }
+
+    /**
+     * Get pacients
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPacients()
+    {
+        return $this->pacients;
     }
 
     /**

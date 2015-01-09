@@ -16,7 +16,7 @@ class LoadAdminLogin extends AbstractFixture implements OrderedFixtureInterface
     {
         $admin = new User();
         $admin
-            ->setIsDoctor(false)
+            ->setIsDoctor(true)
             ->setUsername('admin')
             ->setEmail('miniclinic2015@gmail.com')
             ->setPlainPassword('admin')

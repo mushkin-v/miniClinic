@@ -5,16 +5,46 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/setLocale/{loc}", name="setLocale", defaults={"loc" = "en"})
      */
-    public function indexAction()
+
+    public function setLocaleAction($loc)
     {
-        return $this->getUser()==true? $this->render('default/index.html.twig'): $this->redirect($this->generateUrl('fos_user_security_login'));
+        $this->get('request')->setLocale($loc);
+        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
+    }
+    /**
+     * @Route("/{_locale}", name="homepage", defaults={"_locale": "en"}, requirements={"_locale": "en|uk"})
+     */
+    public function indexAction(Request $request)
+    {
+        $locale = $request->getLocale();
+
+        return $this->getUser()==true?
+            $this->render('default/index.html.twig'):
+            $this->redirect($this->generateUrl('fos_user_security_login'))
+            ;
+    }
+
+    /**
+     * @Route("/Appointments/{infoline}", name="Appointments", defaults={"infoline" = null})
+     * @param $infoline
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function AppointmentsAction($infoline)
+    {
+        return $this->render(
+            'default/Appointments.html.twig',
+            array(
+                'pacient' =>$this->getDoctrine()->getManager()->getRepository('AppBundle:Pacient')->findOneByuser($this->getUser()),
+                'appointments' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Appointment')->findAll(),
+                'infoline'=>$infoline,
+            ));
     }
 
     /**

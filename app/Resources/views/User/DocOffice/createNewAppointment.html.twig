@@ -1,0 +1,123 @@
+{% extends ":User:docOffice.html.twig" %}
+
+{% block DocContent %}
+    {% if app.user.getIsDoctor == true %}
+        <h3>{{ 'doc.app.cr.day'|trans({},"messages") }}</h3><br>
+
+        <form action="{{ path('createNewAppointment') }}" {{ form_enctype(form) }} method="POST">
+            <div class="form-horizontal col-md-12">
+                <div class="form-group">
+                    <div class="col-md-12">{{ form_errors(form.date) }}</div>
+                    <div class="col-md-2 control-label">{{ form_label(form.date, 'doc.app.date'|trans({},"messages")) }}</div>
+                    <div class="col-md-6">{{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}</div>
+                </div>
+
+                <h4>{{ 'doc.app.time'|trans({},"messages") }}</h4>
+                <div class="col-md-12">
+                <ul class="time" data-prototype="{{ form_widget(form.time.vars.prototype)|e }}" >
+                    {% for time in form.time %}
+                        <li>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    {{ form_errors(time.fromTime) }}
+                                </div>
+                                <div class="control-label col-md-3">
+                                    {{ form_label(time.fromTime) }}
+                                </div>
+                                <div class="col-md-3">
+                                    {{ form_widget(time.fromTime, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form_errors(time.toTime) }}
+                                </div>
+                                <div class="control-label col-md-3">
+                                    {{ form_label(time.toTime) }}
+                                </div>
+                                <div class="col-md-3">
+                                    {{ form_widget(time.toTime, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+                </div>
+                <div class=" form-group">
+                    <input class="col-md-offset-7 blogin btn btn-primary" type="submit" value="{{ 'registration.submit'|trans({},'FOSUserBundle') }}" />
+                </div>
+            </div>
+        </form>
+    {% endif %}
+{% endblock DocContent %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+            var $collectionHolder;
+
+        // setup an "add a tag" link
+            var $addTagLink = $('<a href="#" role="button" class="btn btn-sm btn-success add_tag_link">{{ 'doc.app.add.time'|trans({},"messages") }}</a>');
+            var $newLinkLi = $('<li class="form-group col-sm-8"></li>').append($addTagLink);
+
+        jQuery(document).ready(function() {
+            // Get the ul that holds the collection of tags
+            $collectionHolder = $('ul.time');
+
+            // add a delete link to all of the existing tag form li elements
+            $collectionHolder.find('li').each(function() {
+                addTagFormDeleteLink($(this));
+            });
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addTagLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addTagForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li class="form-group col-sm-8"></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+
+            addTagFormDeleteLink($newFormLi);
+        };
+
+            function addTagFormDeleteLink($tagFormLi) {
+                var $removeFormA = $('<a role="button" class="btn btn-sm btn-danger" href="#">{{ 'doc.app.del.time'|trans({},"messages") }}</a>');
+                $tagFormLi.append($removeFormA);
+
+                $removeFormA.on('click', function(e) {
+                    // prevent the link from creating a "#" on the URL
+                    e.preventDefault();
+
+                    // remove the li for the tag form
+                    $tagFormLi.remove();
+                });
+            };
+
+    </script>
+{% endblock %}

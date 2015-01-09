@@ -1,0 +1,27 @@
+{% extends ":User:docOffice.html.twig" %}
+
+{% block DocContent %}
+    {% if app.user.getIsDoctor == true %}
+        <h3>{{ 'doc.app.pac.hist'|trans({},"messages") }}</h3><br>
+        <ol>
+        {% for pacient in pacients %}
+            <li>
+                <p class="text-primary">{{ 'doc.app.pac'|trans({},"messages") }} {{ pacient }}</p>
+                <p>{{ 'doc.app.cn'|trans({},"messages") }} {{ pacient.cardNumber }}, {{ 'doc.app.age'|trans({},"messages") }} {{ pacient.age }}</p>
+                <p>{{ 'doc.app.adress'|trans({},"messages") }} {{ pacient.adress }}, {{ 'doc.app.phone'|trans({},"messages") }} {{ pacient.phone }}</p>
+                <ol>
+                    {% for history in pacient.history %}
+                        <li>
+                            <p class="text-warning">{{ 'doc.app.date'|trans({},"messages") }}{{ history.created|date }}</p>
+                            <p>{{ 'doc.app.Disease'|trans({},"messages") }} {{ history.disease }}</p>
+                            <p>{{ 'doc.app.doc'|trans({},"messages") }} {{ history.doctors.name }} {{ history.doctors.lastname }} {{ history.doctors.surname }}</p>
+                            <p>{{ 'doc.app.Therapy'|trans({},"messages") }} {{ history.therapy }}</p>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+{% endblock DocContent %}
+

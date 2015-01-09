@@ -25,6 +25,16 @@ class Pacient
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppointmentTime", mappedBy="pacient")
+    **/
+    private $appointmentTime;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PacientHistory", mappedBy="pacient")
+     **/
+    private $history;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="card_number", type="string", length=255)
@@ -103,6 +113,21 @@ class Pacient
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
      */
     private $user;
+
+
+    public function __toString()
+    {
+        return $this->getName().' '.$this->getLastname().' '.$this->getSurname();
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->appointmentTime = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->history = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -345,12 +370,78 @@ class Pacient
     }
 
     /**
-     * Set user
+     * Add appointmentTime
      *
-     * @param \AppBundle\Entity\user $user
+     * @param \AppBundle\Entity\AppointmentTime $appointmentTime
      * @return Pacient
      */
-    public function setUser(\AppBundle\Entity\user $user = null)
+    public function addAppointmentTime(\AppBundle\Entity\AppointmentTime $appointmentTime)
+    {
+        $this->appointmentTime[] = $appointmentTime;
+
+        return $this;
+    }
+
+    /**
+     * Remove appointmentTime
+     *
+     * @param \AppBundle\Entity\AppointmentTime $appointmentTime
+     */
+    public function removeAppointmentTime(\AppBundle\Entity\AppointmentTime $appointmentTime)
+    {
+        $this->appointmentTime->removeElement($appointmentTime);
+    }
+
+    /**
+     * Get appointmentTime
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppointmentTime()
+    {
+        return $this->appointmentTime;
+    }
+
+    /**
+     * Add history
+     *
+     * @param \AppBundle\Entity\PacientHistory $history
+     * @return Pacient
+     */
+    public function addHistory(\AppBundle\Entity\PacientHistory $history)
+    {
+        $this->history[] = $history;
+
+        return $this;
+    }
+
+    /**
+     * Remove history
+     *
+     * @param \AppBundle\Entity\PacientHistory $history
+     */
+    public function removeHistory(\AppBundle\Entity\PacientHistory $history)
+    {
+        $this->history->removeElement($history);
+    }
+
+    /**
+     * Get history
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHistory()
+    {
+        return $this->history;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Pacient
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -360,7 +451,7 @@ class Pacient
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\user 
+     * @return \AppBundle\Entity\User 
      */
     public function getUser()
     {
