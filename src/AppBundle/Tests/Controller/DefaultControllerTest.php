@@ -10,9 +10,16 @@ class DefaultControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/login');
 
-        $this->assertTrue($crawler->filter('html:contains("Home")')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains("History")')->count() > 0);
+    }
+
+    public function testindex2()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/login');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function testIndexError()
@@ -29,11 +36,25 @@ class DefaultControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    public function testPersonalError()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/personal/ua');
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
     public function testContact()
     {
         $client = static::createClient();
         $client->request('GET', '/contact');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testContactError()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/contact/ua/ua');
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
     public function testServices()
@@ -42,4 +63,12 @@ class DefaultControllerTest extends WebTestCase
         $client->request('GET', '/services');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
+
+    public function testServicesError()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/services/ua');
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
 }
