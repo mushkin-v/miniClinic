@@ -24,7 +24,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-
         return $this->getUser() == true ?
             $this->render('default/index.html.twig') :
             $this->redirect($this->generateUrl('fos_user_security_login'))

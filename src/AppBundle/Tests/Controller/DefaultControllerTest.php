@@ -70,5 +70,4 @@ class DefaultControllerTest extends WebTestCase
         $client->request('GET', '/services/ua');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
-
 }

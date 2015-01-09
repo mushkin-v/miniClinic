@@ -129,6 +129,7 @@
                <h2 class="index-welcome">{{ 'index.welcome'|trans({},"messages") }}</h2>
 
             {% endif %}
+            <small class="text-danger">{{ 'This test message is shown with Twig extension help!'|show_help|raw }}</small>
             <h3>Heir you can read about our History!</h3>
             <p class="index-text">
                <img class=" index-text-img-left img-rounded" src="{{  asset('bundles/app/images/clinic.JPG') }}" alt="">

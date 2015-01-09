@@ -23,3 +23,8 @@ services:
             arguments: ["%kernel.default_locale%"]
             tags:
                 - { name: kernel.event_subscriber }
+
+    vit.Twig.testTwigExt:
+        class: AppBundle\Twig\testTwigExt
+        tags:
+            - { name: twig.extension }
