@@ -20,7 +20,7 @@ class LoadUserLogin extends AbstractFixture implements OrderedFixtureInterface
             ->setUsername('user')
             ->setEmail('user@user.com')
             ->setPlainPassword('user')
-            ->setEnabled('true')
+            ->setEnabled(true)
             ->setCardNumber(1)
             ->setRoles(array(User::ROLE_DEFAULT))
         ;

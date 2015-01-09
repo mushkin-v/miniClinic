@@ -20,7 +20,7 @@ class LoadDoctorLogin extends AbstractFixture implements OrderedFixtureInterface
             ->setUsername('doctor')
             ->setEmail('doctor@doctor.com')
             ->setPlainPassword('doctor')
-            ->setEnabled('true')
+            ->setEnabled(true)
             ->setCardNumber(2)
             ->setRoles(array(User::ROLE_DEFAULT))
         ;

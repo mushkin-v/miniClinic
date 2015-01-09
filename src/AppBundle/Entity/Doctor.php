@@ -63,14 +63,14 @@ class Doctor
     private $surname;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="age", type="integer")
      * @Assert\Range(
      *      min = 0,
      *      max = 200,
-     *      minMessage = "Wrong age, minimum {{ limit }} years",
-     *      maxMessage = "Wrong age, maximum {{ limit }} years"
+     *      minMessage = "Minimum {{ limit }}",
+     *      maxMessage = "Maximum {{ limit }}"
      * )
      */
     private $age;

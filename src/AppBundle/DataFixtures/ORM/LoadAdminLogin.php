@@ -20,7 +20,7 @@ class LoadAdminLogin extends AbstractFixture implements OrderedFixtureInterface
             ->setUsername('admin')
             ->setEmail('miniclinic2015@gmail.com')
             ->setPlainPassword('admin')
-            ->setEnabled('true')
+            ->setEnabled(true)
             ->setCardNumber(0)
             ->setRoles(array(User::ROLE_SUPER_ADMIN))
         ;

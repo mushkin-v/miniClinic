@@ -93,6 +93,7 @@ class DocController extends Controller
      */
     public function docPacientHistoryAction()
     {
+        $pacients = array();
         $docPacientsHistories = $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')
             ->findOneByuser($this->getUser())->getPacients();
         foreach ($docPacientsHistories as $history) {

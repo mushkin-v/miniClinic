@@ -24,7 +24,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $locale = $request->getLocale();
 
         return $this->getUser() == true ?
             $this->render('default/index.html.twig') :
