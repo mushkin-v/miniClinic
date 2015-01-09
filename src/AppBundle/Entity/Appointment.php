@@ -55,6 +55,7 @@ class Appointment
      */
     public function __construct()
     {
+        $this->date = new \DateTime('NOW');
         $this->time = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

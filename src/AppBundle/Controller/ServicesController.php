@@ -35,6 +35,7 @@ class ServicesController extends Controller
         return $this->redirect($this->generateUrl('contact',['infoline'=>'Your message have been send! Thank you!']));
     }
 
+
     /**
      * @Route("/recordPacientToDoc", name="recordPacientToDoc")
      * @param Request $request
@@ -59,6 +60,31 @@ class ServicesController extends Controller
             $toTime =  $time->getToTime()->format('H:i');
 
             $infoline = 'Your are recorded to time from '.$fromTime.' to '.$toTime.'! Thank you '.$user->getName().' '.$user->getLastName().'!';
+        }
+        return $this->redirect($this->generateUrl('Appointments',['infoline'=>$infoline]));
+    }
+    
+    /**
+     * @Route("/unRecordPacientToDoc", name="unRecordPacientToDoc")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function unRecordPacientToDocAction(Request $request)
+    {   $infoline = 'Sorry, you cant unrecord!';
+        if ($request->isMethod('POST')) {
+            $docTime = $request->request->get('time');
+
+            $user = $this->getUser()->getIsDoctor()?
+                $this->getDoctrine()->getManager()->getRepository('AppBundle:Doctor')->findOneByuser($this->getUser()):
+                $this->getDoctrine()->getManager()->getRepository('AppBundle:Pacient')->findOneByuser($this->getUser());
+            $time = $this->getDoctrine()->getManager()->getRepository('AppBundle:AppointmentTime')->find($docTime);
+            $user->removeAppointmentTime($time);
+            $time->removePacient();
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->persist($time);
+            $this->getDoctrine()->getManager()->flush();
+
+            $infoline = 'Your are unrecorded! Thank you '.$user->getName().' '.$user->getLastName().'!';
         }
         return $this->redirect($this->generateUrl('Appointments',['infoline'=>$infoline]));
     }

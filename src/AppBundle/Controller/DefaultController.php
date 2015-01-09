@@ -27,6 +27,7 @@ class DefaultController extends Controller
         return $this->render(
             'default/Appointments.html.twig',
             array(
+                'pacient' =>$this->getDoctrine()->getManager()->getRepository('AppBundle:Pacient')->findOneByuser($this->getUser()),
                 'appointments' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Appointment')->findAll(),
                 'infoline'=>$infoline,
             ));

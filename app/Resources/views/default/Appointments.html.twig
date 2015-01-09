@@ -13,7 +13,15 @@
                             <li>
                                 <p class="text-warning">Appointment time: {{ time.fromTime|date("h:i") }} - {{ time.toTime|date("h:i") }}
                                 {% if time.pacient is not null %}
+                                    {% if time.pacient == pacient %}
                                     <p class="text-danger">Pacient: {{ time.pacient }}</p>
+                                    <form role="form" action="{{ path('unRecordPacientToDoc') }}" method="POST">
+                                        <input type="hidden" name="time" value="{{ time.id }}">
+                                        <button type="submit" class="btn btn-default">unrecord yourself</button>
+                                    </form>
+                                    {% else %}
+                                        <p class="text-danger">Some one has already recorded</p>
+                                {% endif %}
                                 {% else %}
                                 <form role="form" action="{{ path('recordPacientToDoc') }}" method="POST">
                                     <input type="hidden" name="time" value="{{ time.id }}">

@@ -197,6 +197,18 @@ class AppointmentTime
     }
 
     /**
+     * remove pacient
+     *
+     * @return AppointmentTime
+     */
+    public function removePacient()
+    {
+        $this->pacient = null;
+
+        return $this;
+    }
+
+    /**
      * Get pacient
      *
      * @return \AppBundle\Entity\Pacient 
