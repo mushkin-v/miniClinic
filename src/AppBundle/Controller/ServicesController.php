@@ -63,7 +63,7 @@ class ServicesController extends Controller
         }
         return $this->redirect($this->generateUrl('Appointments',['infoline'=>$infoline]));
     }
-    
+
     /**
      * @Route("/unRecordPacientToDoc", name="unRecordPacientToDoc")
      * @param Request $request
