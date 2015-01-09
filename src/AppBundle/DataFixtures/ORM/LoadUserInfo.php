@@ -18,9 +18,9 @@ class LoadUserInfo extends AbstractFixture implements OrderedFixtureInterface
         $pacient = new Pacient();
         $pacient
             ->setCardNumber($user->getCardNumber())
-            ->setName('Dmitrii')
-            ->setLastname('Tarasovich')
-            ->setSurname('Sidorov')
+            ->setName('Taras')
+            ->setLastname('Grigorievich')
+            ->setSurname('Shevchenko')
             ->setAge(35)
             ->setAdress('Mexico, Atlanta, portRoyale st., 35/1')
             ->setPhone('+3097-333-33-33')

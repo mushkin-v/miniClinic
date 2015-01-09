@@ -2,17 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Doctor;
 use AppBundle\Entity\Pacient;
-use AppBundle\Entity\User;
-use AppBundle\Form\Type\DoctorType;
-use AppBundle\Form\Type\DoctorLoginType;
 use AppBundle\Form\Type\PacientType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 
 class PacientController extends Controller
 {
