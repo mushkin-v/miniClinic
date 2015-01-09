@@ -22,7 +22,7 @@ class DefaultController extends Controller
     /**
      * @Route("/{_locale}", name="homepage", defaults={"_locale": "en"}, requirements={"_locale": "en|uk"})
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
 
         return $this->getUser() == true ?
